@@ -1,0 +1,57 @@
+[
+  {
+    "id": "tactics",
+    "name": "Tactics",
+    "category": "Mental",
+    "tiers": [
+      {
+        "rarity": "uncommon",
+        "desc": "When you make an ability check, you may roll 1d10 and add the result to the roll — potentially turning a failure into a success. If the check still fails, the use is not consumed. 2 uses; recharge on a short or long rest."
+      }
+    ]
+  },
+  {
+    "id": "system_sight",
+    "name": "System Sight",
+    "category": "Meta",
+    "tiers": [
+      {
+        "rarity": "uncommon",
+        "desc": "You perceive the system layer on the world: you can see whether an NPC is a quest-giver, the rarity of quests they offer, any preset (system-authored) quests currently available in view, and the mechanical tags attached to NPCs (role, disposition, faction affiliation). Names and details still require a normal conversation or check."
+      }
+    ]
+  },
+  {
+    "id": "maws_curse",
+    "name": "Maw's Curse",
+    "category": "Physical",
+    "tiers": [
+      {
+        "rarity": "uncommon",
+        "desc": "You gain darkvision out to 60 ft. Within that range, dim light appears as bright light, and darkness appears as dim light. You cannot discern color in darkness, seeing only in shades of gray."
+      }
+    ]
+  },
+  {
+    "id": "enchanted_eyes",
+    "name": "Enchanted Eyes",
+    "category": "Arcane",
+    "tiers": [
+      {
+        "rarity": "common",
+        "desc": "You can read the arcane language on sight, without needing to decipher, translate, or make a check. Comprehending its meaning still requires the context to make sense of what is written."
+      }
+    ]
+  },
+  {
+    "id": "fast_feet",
+    "name": "Fast Feet",
+    "category": "Physical",
+    "tiers": [
+      {
+        "rarity": "common",
+        "desc": "Your walking speed increases by 10 ft."
+      }
+    ]
+  }
+]

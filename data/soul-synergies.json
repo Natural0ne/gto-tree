@@ -1,0 +1,134 @@
+[
+  {
+    "id": "syn_fire_3",
+    "theme": "Fire",
+    "threshold": 3,
+    "tier": "minor",
+    "options": [
+      {
+        "id": "pyromancer",
+        "name": "Pyromancer",
+        "rarity": "rare",
+        "desc": "Your fire damage ignores resistance from nonmagical sources (mundane armor, wet cloth, mundane stone)."
+      },
+      {
+        "id": "hearth_keeper",
+        "name": "Hearth-Keeper",
+        "rarity": "rare",
+        "desc": "You and allies within 10 ft. of you have resistance to cold damage and ignore non-extreme cold environments."
+      },
+      {
+        "id": "emberkin",
+        "name": "Emberkin",
+        "rarity": "rare",
+        "desc": "When you take fire damage, you may roll a d6; on a 4+, you take no damage and gain 5 temp HP. Once per round."
+      }
+    ]
+  },
+  {
+    "id": "syn_fire_5",
+    "theme": "Fire",
+    "threshold": 5,
+    "tier": "major",
+    "options": [
+      {
+        "id": "inferno",
+        "name": "Inferno-Touched",
+        "rarity": "epic",
+        "desc": "When you take fire damage, regain MP equal to half the damage taken (rounded down). Once per round."
+      },
+      {
+        "id": "cinderborn",
+        "name": "Cinderborn",
+        "rarity": "epic",
+        "desc": "Your fire spells deal +1 die of damage, and creatures killed by your fire leave behind embers that deal 1d6 fire to anyone entering the space for 1 minute."
+      }
+    ]
+  },
+  {
+    "id": "syn_necrotic_3",
+    "theme": "Necrotic",
+    "threshold": 3,
+    "tier": "minor",
+    "options": [
+      {
+        "id": "deathbound",
+        "name": "Death-Bound",
+        "rarity": "rare",
+        "desc": "You have advantage on saves against being frightened or charmed. Once per long rest, when you would drop to 0 HP, you may drop to 1 instead."
+      },
+      {
+        "id": "gravewalker",
+        "name": "Grave-Walker",
+        "rarity": "rare",
+        "desc": "You can move through spaces occupied by hostile undead as though they were difficult terrain, and take no opportunity attacks from them."
+      },
+      {
+        "id": "deathknell",
+        "name": "Death-Knell",
+        "rarity": "rare",
+        "desc": "When a creature within 30 ft. of you drops to 0 HP, you regain HP equal to your prof bonus (once per turn)."
+      }
+    ]
+  },
+  {
+    "id": "syn_necrotic_5",
+    "theme": "Necrotic",
+    "threshold": 5,
+    "tier": "major",
+    "options": [
+      {
+        "id": "devouringdark",
+        "name": "The Devouring Dark",
+        "rarity": "legendary",
+        "desc": "Creatures slain by you rise as wraiths under your command for 1 minute (max 1 wraith at a time)."
+      },
+      {
+        "id": "soulharvester",
+        "name": "Soul-Harvester",
+        "rarity": "legendary",
+        "desc": "When a creature within 30 ft. of you dies, you may regain MP equal to half its CR (rounded up, min 1). Once per round."
+      }
+    ]
+  },
+  {
+    "id": "syn_air_3",
+    "theme": "Air",
+    "threshold": 3,
+    "tier": "minor",
+    "options": [
+      {
+        "id": "windwalker",
+        "name": "Wind-Walker",
+        "rarity": "rare",
+        "desc": "You may take the Dash action as a bonus action; opportunity attacks against you have disadvantage."
+      },
+      {
+        "id": "stormcalled",
+        "name": "Storm-Called",
+        "rarity": "rare",
+        "desc": "You have resistance to thunder and lightning damage; ranged attacks against you have disadvantage in open air."
+      }
+    ]
+  },
+  {
+    "id": "syn_water_3",
+    "theme": "Water",
+    "threshold": 3,
+    "tier": "minor",
+    "options": [
+      {
+        "id": "tidesong",
+        "name": "Tide-Song",
+        "rarity": "rare",
+        "desc": "Your healing effects restore an additional 1d4 HP and may also remove one minor condition (DM discretion)."
+      },
+      {
+        "id": "deepwell",
+        "name": "Deep-Well",
+        "rarity": "rare",
+        "desc": "Once per short rest, restore 5 MP as a bonus action by drawing on your inner tide."
+      }
+    ]
+  }
+]

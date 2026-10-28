@@ -1,0 +1,968 @@
+[
+  {
+    "id": "ef_p_ember_touch",
+    "name": "Ember-Touched",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Fire"
+    ],
+    "desc": "You have resistance to fire damage of 5 or less per instance. You suffer no ill effects from non-extreme hot environments."
+  },
+  {
+    "id": "ef_p_warm_blood",
+    "name": "Warm-Blooded",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Fire"
+    ],
+    "desc": "You can ignite a small flame (candle, tinder, torch) at will, no action required."
+  },
+  {
+    "id": "ef_p_kindling_strike",
+    "name": "Kindling Strike",
+    "type": "passive",
+    "rarity": "uncommon",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Fire"
+    ],
+    "desc": "When you land a weapon attack, once per turn you may deal +1 fire damage. On a critical hit, the target catches fire for 1d4 fire damage at the start of its next turn (DC 10 DEX to negate)."
+  },
+  {
+    "id": "ef_p_tidesense",
+    "name": "Tide-Sensed",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Utility",
+      "Mobility"
+    ],
+    "themes": [
+      "Water"
+    ],
+    "desc": "You can hold your breath for 10 minutes. Your swim speed equals your walking speed."
+  },
+  {
+    "id": "ef_p_coldward",
+    "name": "Cold-Warded",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Water"
+    ],
+    "desc": "You have resistance to cold damage of 5 or less per instance. Non-extreme cold environments do not affect you."
+  },
+  {
+    "id": "ef_p_acidproof",
+    "name": "Acid-Proof Skin",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Water"
+    ],
+    "desc": "You have resistance to acid damage of 5 or less per instance. Your gear is unaffected by minor acid exposure."
+  },
+  {
+    "id": "ef_p_flowing_form",
+    "name": "Flowing Form",
+    "type": "passive",
+    "rarity": "uncommon",
+    "cats": [
+      "Mobility",
+      "Defense"
+    ],
+    "themes": [
+      "Water"
+    ],
+    "desc": "You cannot be knocked prone while you have at least 5 ft. of movement remaining, and you have advantage on saves against being restrained or grappled."
+  },
+  {
+    "id": "ef_p_stone_skin",
+    "name": "Stone-Skinned",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Earth",
+      "Physical"
+    ],
+    "desc": "When you take bludgeoning damage from a nonmagical source, reduce it by 1 (minimum 1)."
+  },
+  {
+    "id": "ef_p_sure_footed",
+    "name": "Sure-Footed",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Mobility"
+    ],
+    "themes": [
+      "Earth"
+    ],
+    "desc": "Difficult terrain caused by rock, gravel, or uneven ground does not slow you. +1 to saves against being knocked prone."
+  },
+  {
+    "id": "ef_p_deep_lungs",
+    "name": "Deep-Rooted",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Earth"
+    ],
+    "desc": "You have advantage on saves against being pushed or pulled by effects, provided you are on stable ground."
+  },
+  {
+    "id": "ef_p_stonecunning",
+    "name": "Stone-Cunning",
+    "type": "passive",
+    "rarity": "uncommon",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Earth"
+    ],
+    "desc": "You have proficiency (or expertise if already proficient) on History checks about stonework, ruins, and underground structures. You can sense the direction of true north while underground."
+  },
+  {
+    "id": "ef_p_light_step",
+    "name": "Light-Step",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Mobility"
+    ],
+    "themes": [
+      "Air"
+    ],
+    "desc": "+5 ft. walking speed. Reduce falling damage by 5."
+  },
+  {
+    "id": "ef_p_shockward",
+    "name": "Shock-Warded",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Air"
+    ],
+    "desc": "You have resistance to lightning damage of 5 or less per instance."
+  },
+  {
+    "id": "ef_p_thunderward",
+    "name": "Thunder-Warded",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Air"
+    ],
+    "desc": "You have resistance to thunder damage of 5 or less per instance. You are not deafened by non-magical loud sounds."
+  },
+  {
+    "id": "ef_p_wind_read",
+    "name": "Wind-Read",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Air"
+    ],
+    "desc": "You always know which direction is downwind. You can whisper at normal volume and be heard clearly up to 30 ft. if the wind carries your voice."
+  },
+  {
+    "id": "ef_p_haloed",
+    "name": "Haloed",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Radiant"
+    ],
+    "desc": "You emit dim light in a 5 ft. radius at will (no action). It can be any color; you may suppress or resume it."
+  },
+  {
+    "id": "ef_p_light_ward",
+    "name": "Light-Warded",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Radiant"
+    ],
+    "desc": "You have resistance to radiant damage of 5 or less per instance. Bright light does not blind or dazzle you."
+  },
+  {
+    "id": "ef_p_undead_bane",
+    "name": "Undead's Bane",
+    "type": "passive",
+    "rarity": "uncommon",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Radiant"
+    ],
+    "desc": "Your weapon attacks deal +1 radiant damage against undead and fiends. You have advantage on the first attack roll against an undead creature you can see."
+  },
+  {
+    "id": "ef_p_deathmark",
+    "name": "Death-Marked",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Necrotic"
+    ],
+    "desc": "You have resistance to necrotic damage of 5 or less per instance. You have advantage on death saving throws."
+  },
+  {
+    "id": "ef_p_gravechill",
+    "name": "Grave-Touched",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Necrotic"
+    ],
+    "desc": "Undead of CR 1/4 or lower ignore you unless you attack them. You can identify a corpse's cause of death with a 1-minute examination."
+  },
+  {
+    "id": "ef_p_soulsight",
+    "name": "Soul-Sight",
+    "type": "passive",
+    "rarity": "uncommon",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Necrotic",
+      "Psychic"
+    ],
+    "desc": "You always know if a creature you can see is undead, and you can sense any undead creature within 30 ft. even through walls (direction and rough distance only)."
+  },
+  {
+    "id": "ef_p_force_ward",
+    "name": "Force-Warded",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Force"
+    ],
+    "desc": "You have resistance to force damage of 5 or less per instance."
+  },
+  {
+    "id": "ef_p_arcane_touch",
+    "name": "Arcane-Touched",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Utility",
+      "Resource"
+    ],
+    "themes": [
+      "Force"
+    ],
+    "desc": "+3 max MP (one-time). If you had no MP pool, you now have one starting at 3."
+  },
+  {
+    "id": "ef_p_spell_reader",
+    "name": "Spell-Reader",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Force",
+      "Psychic"
+    ],
+    "desc": "You have advantage on Arcana checks to identify a spell as it is being cast."
+  },
+  {
+    "id": "ef_p_null_field",
+    "name": "Null-Field",
+    "type": "passive",
+    "rarity": "uncommon",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Force"
+    ],
+    "desc": "You have advantage on saving throws against spells of 3rd level or lower."
+  },
+  {
+    "id": "ef_p_mind_ward",
+    "name": "Mind-Warded",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Psychic"
+    ],
+    "desc": "You have resistance to psychic damage of 5 or less per instance. +1 to WIS saves against being charmed."
+  },
+  {
+    "id": "ef_p_still_mind",
+    "name": "Still Mind",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Psychic"
+    ],
+    "desc": "You have advantage on saves against being frightened."
+  },
+  {
+    "id": "ef_p_reader",
+    "name": "Reader of Faces",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Social"
+    ],
+    "themes": [
+      "Psychic"
+    ],
+    "desc": "+1 to Insight checks. When a creature within 30 ft. lies to you and you succeed on the Insight check, you also learn one true thing they meant to hide (DM's choice, single sentence)."
+  },
+  {
+    "id": "ef_p_poison_ward",
+    "name": "Poison-Warded",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Poison"
+    ],
+    "desc": "You have resistance to poison damage of 5 or less per instance. +1 to saves against the poisoned condition."
+  },
+  {
+    "id": "ef_p_iron_gut",
+    "name": "Iron Gut",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense",
+      "Utility"
+    ],
+    "themes": [
+      "Poison"
+    ],
+    "desc": "You are immune to sickness from spoiled food, minor toxins, and mundane alcohol. Advantage on saves against ingested poisons."
+  },
+  {
+    "id": "ef_p_venom_scribe",
+    "name": "Venom-Scribe",
+    "type": "passive",
+    "rarity": "uncommon",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Poison"
+    ],
+    "desc": "You have proficiency with the poisoner's kit, or expertise if already proficient. You can identify any poison you touch or taste (safely) within 1 minute."
+  },
+  {
+    "id": "ef_p_tough_hide",
+    "name": "Tough Hide",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Physical"
+    ],
+    "desc": "+2 max HP (one-time)."
+  },
+  {
+    "id": "ef_p_hard_knuckles",
+    "name": "Hard Knuckles",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Physical"
+    ],
+    "desc": "Your unarmed strikes deal 1d4 bludgeoning damage (instead of 1) and count as a light weapon for finesse-like calculation."
+  },
+  {
+    "id": "ef_p_iron_grip",
+    "name": "Iron Grip",
+    "type": "passive",
+    "rarity": "common",
+    "cats": [
+      "Defense",
+      "Utility"
+    ],
+    "themes": [
+      "Physical"
+    ],
+    "desc": "You cannot be disarmed by any effect that allows a save. +1 to Athletics checks made to grapple or shove."
+  },
+  {
+    "id": "ef_p_weapon_kin",
+    "name": "Weapon-Kin",
+    "type": "passive",
+    "rarity": "uncommon",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Physical"
+    ],
+    "desc": "Choose one weapon at slotting. You gain +1 to attack rolls with that specific weapon (or type, at DM discretion)."
+  },
+  {
+    "id": "ef_a_ember_flick",
+    "name": "Ember-Flick",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Fire"
+    ],
+    "desc": "prof bonus/short rest (action): a creature within 30 ft. makes a DEX save (DC 8+prof+casting mod) or takes 1d6 fire damage."
+  },
+  {
+    "id": "ef_a_hearth_ward",
+    "name": "Hearth-Ward",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Fire"
+    ],
+    "desc": "1/short rest (reaction to taking cold or fire damage): reduce the damage by 1d8. If the damage type was cold, gain temp HP equal to the amount reduced."
+  },
+  {
+    "id": "ef_a_tide_mercy",
+    "name": "Tide's Mercy",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Recovery"
+    ],
+    "themes": [
+      "Water"
+    ],
+    "desc": "prof bonus/long rest (action): touch a creature; it regains 1d8 HP."
+  },
+  {
+    "id": "ef_a_frost_grip",
+    "name": "Frost Grip",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Water"
+    ],
+    "desc": "1/short rest (bonus action): a creature within 30 ft. makes a CON save; on failure it takes 1d6 cold damage and its speed drops by 10 ft. until the end of your next turn."
+  },
+  {
+    "id": "ef_a_stoneform",
+    "name": "Stone-Set",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Earth"
+    ],
+    "desc": "prof bonus/long rest (bonus action): until the start of your next turn, you cannot be moved and gain +2 AC, but your speed becomes 0."
+  },
+  {
+    "id": "ef_a_shatter_ground",
+    "name": "Shatter-Ground",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Earth"
+    ],
+    "desc": "1/short rest (action): creatures in a 10-ft. cone make a DEX save or take 1d8 bludgeoning damage and are pushed 5 ft. The ground in the area becomes difficult terrain."
+  },
+  {
+    "id": "ef_a_quickstep",
+    "name": "Quickstep",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Mobility"
+    ],
+    "themes": [
+      "Air"
+    ],
+    "desc": "prof bonus/long rest (bonus action): teleport up to 15 ft. to a space you can see."
+  },
+  {
+    "id": "ef_a_thundercall",
+    "name": "Thunder-Call",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Air"
+    ],
+    "desc": "1/short rest (action): a 15 ft. cone; creatures make a CON save or take 1d6 thunder damage and are pushed 5 ft."
+  },
+  {
+    "id": "ef_a_shockstrike",
+    "name": "Shock-Strike",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Air"
+    ],
+    "desc": "1/short rest (reaction on hit with a weapon attack): the attack deals +1d6 lightning damage and jumps to one other creature within 10 ft. of the target for the same lightning damage."
+  },
+  {
+    "id": "ef_a_light_lash",
+    "name": "Light-Lash",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Radiant"
+    ],
+    "desc": "prof bonus/short rest (action): a creature within 30 ft. makes a DEX save or takes 1d6 radiant damage. On a fail against undead or fiends, deal 1d8 instead."
+  },
+  {
+    "id": "ef_a_dawn_touch",
+    "name": "Dawn-Touch",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Recovery"
+    ],
+    "themes": [
+      "Radiant"
+    ],
+    "desc": "1/long rest (action): touch a creature; it regains 2d4 HP and one condition ends (blinded, deafened, or paralyzed only)."
+  },
+  {
+    "id": "ef_a_wither",
+    "name": "Wither-Touch",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Necrotic"
+    ],
+    "desc": "prof bonus/short rest (action): touch attack against a creature within 5 ft.; on hit, it takes 1d6 necrotic damage and you gain temp HP equal to the amount dealt."
+  },
+  {
+    "id": "ef_a_death_ward",
+    "name": "Death-Whisper",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Utility"
+    ],
+    "themes": [
+      "Necrotic"
+    ],
+    "desc": "1/long rest (action): question a corpse dead less than 1 hour; it answers one question truthfully if it can."
+  },
+  {
+    "id": "ef_a_arcane_bolt",
+    "name": "Arcane Bolt",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Force"
+    ],
+    "desc": "prof bonus/short rest (action): a creature within 60 ft. must be hit by a spell attack (your best casting mod); on hit, deals 1d8 force damage. Ignores half and three-quarters cover."
+  },
+  {
+    "id": "ef_a_null_pulse",
+    "name": "Null Pulse",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Defense",
+      "Offense"
+    ],
+    "themes": [
+      "Force"
+    ],
+    "desc": "1/short rest (reaction to a spell of 2nd level or lower being cast within 30 ft.): the caster makes a CHA save or the spell fails and the slot/MP is expended."
+  },
+  {
+    "id": "ef_a_mind_prick",
+    "name": "Mind-Prick",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Psychic"
+    ],
+    "desc": "prof bonus/short rest (action): a creature within 30 ft. makes an INT save or takes 1d6 psychic damage and cannot take reactions until the end of its next turn."
+  },
+  {
+    "id": "ef_a_thought_shove",
+    "name": "Thought-Shove",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Social"
+    ],
+    "themes": [
+      "Psychic"
+    ],
+    "desc": "1/long rest (action): a creature within 30 ft. that can hear and understand you makes a WIS save; on fail, it obeys one simple, non-suicidal command for 1 round."
+  },
+  {
+    "id": "ef_a_venom_touch",
+    "name": "Venom-Touch",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Poison"
+    ],
+    "desc": "prof bonus/short rest (bonus action): the next weapon attack you hit before end of turn deals +1d6 poison damage and the target must make a CON save or be poisoned until the end of its next turn."
+  },
+  {
+    "id": "ef_a_purge",
+    "name": "Purge",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Recovery"
+    ],
+    "themes": [
+      "Poison"
+    ],
+    "desc": "1/long rest (action): touch a creature; end the poisoned condition on it, or grant it advantage on its next save against poison within 1 minute."
+  },
+  {
+    "id": "ef_a_steadying_stance",
+    "name": "Steadying Stance",
+    "type": "active",
+    "rarity": "common",
+    "cats": [
+      "Defense"
+    ],
+    "themes": [
+      "Physical"
+    ],
+    "desc": "prof bonus/short rest (bonus action): gain +1 AC until the start of your next turn. If you did not move this turn, gain temp HP equal to your prof bonus."
+  },
+  {
+    "id": "ef_a_hard_swing",
+    "name": "Hard Swing",
+    "type": "active",
+    "rarity": "uncommon",
+    "cats": [
+      "Offense"
+    ],
+    "themes": [
+      "Physical"
+    ],
+    "desc": "1/short rest (bonus action after a weapon hit): the hit deals +1d8 damage of the weapon's type."
+  },
+  {
+    "id": "ef_sg_particles",
+    "name": "Drifting Particles",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "Small particles drift around you at all times. In stillness they hang like dust motes; in motion they swirl and trail. Cosmetic."
+  },
+  {
+    "id": "ef_sg_faint_glow",
+    "name": "Faint Glow",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "Your skin bears a soft glow in dim light and darkness. It is stronger where blood runs closest — throat, wrists, temples. Cosmetic."
+  },
+  {
+    "id": "ef_sg_lit_eyes",
+    "name": "Lit Eyes",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "Your eyes glow subtly in dim light and darkness. In bright light they simply appear vividly colored. Cosmetic."
+  },
+  {
+    "id": "ef_sg_softsteps",
+    "name": "Signed Steps",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "Where you walk, faint traces linger for a moment before fading. Cosmetic. A skilled tracker might identify you by them."
+  },
+  {
+    "id": "ef_sg_marks",
+    "name": "Physical Mark",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "A mark appears somewhere on your body — a scar, a birthmark, a tattoo-like sigil. It cannot be covered by illusion. Cosmetic."
+  },
+  {
+    "id": "ef_sg_halo",
+    "name": "Halo",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "A faint ring hangs behind your head, visible only from certain angles or in reflections. Cosmetic."
+  },
+  {
+    "id": "ef_sg_still_hair",
+    "name": "Untouched Hair",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "Your hair moves as though by breath and wind that isn't there, and stays perfectly still when wind should move it. Cosmetic."
+  },
+  {
+    "id": "ef_sg_reflect",
+    "name": "Uncanny Reflection",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "Your reflection sometimes lags, moves independently for a fraction of a second, or shows something slightly different from you. Never long enough to matter. Cosmetic."
+  },
+  {
+    "id": "ef_sg_scent",
+    "name": "Signature Scent",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [],
+    "desc": "You carry a faint, distinctive scent that lingers where you have been for about an hour after you leave. Cosmetic."
+  },
+  {
+    "id": "ef_sg_embers",
+    "name": "Drifting Embers",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Fire"
+    ],
+    "desc": "Embers drift around you when you are stirred, angered, or exert yourself. Cosmetic."
+  },
+  {
+    "id": "ef_sg_ripples",
+    "name": "Ripplekin",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Water"
+    ],
+    "desc": "Water and other liquids you touch ripple outward on contact. Plants bearing moisture bend gently toward you. Cosmetic."
+  },
+  {
+    "id": "ef_sg_stonestep",
+    "name": "Stone-Step",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Earth"
+    ],
+    "desc": "Stone or bare earth beneath your feet emits faint dust when you step firmly, though no debris rises. Cosmetic."
+  },
+  {
+    "id": "ef_sg_windkin",
+    "name": "Wind-Kin",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Air"
+    ],
+    "desc": "A soft breeze moves your hair and clothing at all times, even indoors and underground. Cosmetic."
+  },
+  {
+    "id": "ef_sg_dawnlit",
+    "name": "Dawn-Lit",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Radiant"
+    ],
+    "desc": "A gentle radiance rests on your skin in low light. NPCs of religious bent may treat you with curiosity or reverence. Cosmetic."
+  },
+  {
+    "id": "ef_sg_dimming",
+    "name": "Dimming Presence",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Necrotic"
+    ],
+    "desc": "Small light sources near you (candles, torches) flicker or dim in your presence. Small creatures avoid your gaze. Cosmetic."
+  },
+  {
+    "id": "ef_sg_shimmer",
+    "name": "Arcane Shimmer",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Force"
+    ],
+    "desc": "A faint arcane shimmer trails your fingertips when you gesture. Spellcasters recognize you as gifted. Cosmetic."
+  },
+  {
+    "id": "ef_sg_thoughtprint",
+    "name": "Thought-Print",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Psychic"
+    ],
+    "desc": "Those in a quiet room with you can occasionally sense your mood without explanation, but never your thoughts. Cosmetic."
+  },
+  {
+    "id": "ef_sg_faint_taint",
+    "name": "Faint Taint",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Poison"
+    ],
+    "desc": "Small flying pests avoid you and die if they touch you. Cut flowers wilt slightly in your presence over hours. Cosmetic."
+  },
+  {
+    "id": "ef_sg_footprint",
+    "name": "Weighted Print",
+    "type": "sign",
+    "rarity": "common",
+    "cats": [
+      "Meta"
+    ],
+    "themes": [
+      "Physical"
+    ],
+    "desc": "Your footfalls sound slightly heavier than they should, in a way skilled ears can identify. Cosmetic."
+  }
+]

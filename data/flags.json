@@ -1,0 +1,26 @@
+[
+  {
+    "id": "quest_crimson_keep",
+    "type": "quest",
+    "label": "Complete: The Crimson Keep",
+    "hint": "Something sleeps beneath the old fortress."
+  },
+  {
+    "id": "slain_ashen_warden",
+    "type": "boss",
+    "label": "Slay the Ashen Warden",
+    "hint": "The Warden's strength can be claimed by the one who fells it."
+  },
+  {
+    "id": "oracle_blessing",
+    "type": "story",
+    "label": "Receive the Oracle's blessing",
+    "hint": "Seek the one who sees beyond the veil."
+  },
+  {
+    "id": "flame_trial",
+    "type": "deed",
+    "label": "Survive the Trial of Embers",
+    "hint": "Walk into the fire and do not flinch."
+  }
+]

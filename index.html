@@ -1,0 +1,1050 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=4" />
+<title>Grand Terra Online — Talent · Soul · Trait</title>
+<style>
+  /* ============================================================
+     GRAND TERRA ONLINE — TALENT / SOUL / TRAIT BUILDER
+     Single file. Edit the data arrays near the top of <script>:
+        TALENT_NODES, FLAGS         -> Talents tab
+        SOUL_EFFECTS, SOUL_SYNERGIES,
+        SOUL_CATEGORIES, SOUL_THEMES,
+        SOUL_SLOT_AUTO, SOUL_SLOT_FLAGS -> Soul tab
+        TRAITS                      -> Trait tab
+     No build tools, no server. Open in a browser.
+     ============================================================ */
+  :root{
+    --bg:#0d0b14; --bg2:#15111f; --ink:#e9e3d3; --ink-dim:#9b927f;
+    --line:#3a3350; --line-dim:#241f33; --gold:#d8b15a; --panel:#181321;
+    --soul:#b9a6dc; --soul-deep:#7a5fae; --trait:#5fa6a0;
+    --r-common:#9aa0a6; --r-uncommon:#5f9e6b; --r-rare:#4a8fd6; --r-epic:#a464d6;
+    --r-royal:#d8b15a; --r-relic:#c87f3a; --r-legendary:#e0792e; --r-mythical:#d6425a; --r-deity:#f3ead0;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:radial-gradient(1200px 700px at 70% -10%, #1c1630 0%, transparent 60%),
+      radial-gradient(900px 600px at 0% 110%, #1a1226 0%, transparent 55%), var(--bg);
+    color:var(--ink);font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+    overflow:hidden;-webkit-font-smoothing:antialiased;
+  }
+  body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:9;opacity:.04;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+  header{position:fixed;top:0;left:0;right:0;height:64px;z-index:20;display:flex;align-items:center;gap:14px;padding:0 22px;
+    background:linear-gradient(180deg, rgba(13,11,20,.96), rgba(13,11,20,.7));border-bottom:1px solid var(--line-dim);backdrop-filter:blur(6px)}
+  .brand{display:flex;flex-direction:column;line-height:1.05}
+  .brand b{font-size:17px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-family:"Trajan Pro","Iowan Old Style",Georgia,serif}
+  .brand span{font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-dim)}
+
+  /* tabs */
+  .tabs{display:flex;gap:4px;margin-left:8px}
+  .tab{font:inherit;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);background:transparent;border:1px solid transparent;border-radius:4px 4px 0 0;padding:9px 16px;cursor:pointer;transition:.15s;border-bottom:2px solid transparent}
+  .tab:hover{color:var(--ink)}
+  .tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+  .tab.soul.active{color:var(--soul);border-bottom-color:var(--soul)}
+  .tab.trait.active{color:var(--trait);border-bottom-color:var(--trait)}
+
+  .pts{display:flex;align-items:baseline;gap:7px;padding:6px 12px;border:1px solid var(--line);border-radius:3px;background:rgba(216,177,90,.06)}
+  .pts small{font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+  .pts input{width:52px;background:transparent;border:none;color:var(--gold);font:inherit;font-size:18px;text-align:center;outline:none;border-bottom:1px solid var(--line)}
+  .pts.soulpts{background:rgba(185,166,220,.07)} .pts.soulpts input{color:var(--soul)}
+  .pts.traitpts{background:rgba(95,166,160,.07)} .pts.traitpts input{color:var(--trait)}
+  .pts.levelpts{background:rgba(160,140,200,.06)} .pts.levelpts input{color:#c9b8e0;width:38px}
+  .pts .sp{font-size:11px;color:var(--ink);letter-spacing:.04em;padding-left:7px;border-left:1px solid var(--line);opacity:.85}
+  .pts .sp b{color:var(--gold);font-weight:700}
+  .pts.soulpts .sp b{color:var(--soul)} .pts.traitpts .sp b{color:var(--trait)}
+  .spacer{flex:1}
+  button.tool{font:inherit;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink);background:var(--panel);border:1px solid var(--line);padding:8px 11px;border-radius:3px;cursor:pointer;transition:.15s}
+  button.tool:hover{border-color:var(--gold);color:var(--gold)}
+  button.tool.danger:hover{border-color:var(--r-mythical);color:var(--r-mythical)}
+  button.tool.dm{border-color:#5a4a7a;color:#b9a6dc}
+  button.tool.dm:hover{border-color:#a464d6;color:#cdb3ec}
+
+  /* sub-bar: filters (talent/soul) or nothing (trait) */
+  .subbar{position:fixed;top:64px;left:0;right:0;z-index:18;display:flex;gap:7px;align-items:center;flex-wrap:wrap;padding:9px 22px;background:rgba(13,11,20,.82);border-bottom:1px solid var(--line-dim);backdrop-filter:blur(6px);min-height:42px}
+  .chip{font:inherit;font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border:1px solid var(--line);border-radius:999px;color:var(--ink-dim);background:transparent;cursor:pointer;transition:.15s}
+  .chip:hover{color:var(--ink)}
+  .chip.active{color:var(--bg);background:var(--gold);border-color:var(--gold);font-weight:700}
+  .legend{margin-left:auto;display:flex;gap:9px;flex-wrap:wrap}
+  .legend .l{display:flex;align-items:center;gap:5px;font-size:9px;letter-spacing:.05em;text-transform:uppercase;color:var(--ink-dim)}
+  .legend .dot{width:9px;height:9px;border-radius:50%}
+  .soulpicker{display:flex;gap:7px;align-items:center;font-size:11px;color:var(--ink-dim);letter-spacing:.08em;text-transform:uppercase}
+
+  /* stage shared by tree views */
+  .view{position:fixed;inset:0;top:106px;display:none}
+  .view.active{display:block}
+  #stage{position:absolute;inset:0;overflow:hidden;cursor:grab}
+  #stage.drag{cursor:grabbing}
+  .worldwrap{position:absolute;left:0;top:0;transform-origin:0 0}
+  svg.wires{position:absolute;left:0;top:0;overflow:visible;pointer-events:none;z-index:1}
+  .wire{stroke:var(--line);stroke-width:2;fill:none;opacity:.5}
+  .wire.met{stroke:var(--gold);opacity:.85}
+
+  .node{position:absolute;width:168px;z-index:2;transform:translate(-50%,-50%);background:linear-gradient(180deg,var(--panel),#120e1b);border:1px solid var(--line);border-radius:7px;padding:11px 12px 12px;cursor:pointer;transition:transform .12s,border-color .15s,box-shadow .15s;box-shadow:0 6px 18px rgba(0,0,0,.45)}
+  .node:hover{transform:translate(-50%,-50%) scale(1.04);border-color:var(--ink-dim)}
+  .node .rar{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);display:flex;align-items:center;gap:6px;margin-bottom:5px}
+  .node .rar .dot{width:8px;height:8px;border-radius:50%}
+  .node .nm{font-size:14px;line-height:1.18;margin-bottom:6px;font-weight:600}
+  .node .meta{display:flex;justify-content:space-between;align-items:center;gap:6px}
+  .node .cost{font-size:11px;color:var(--gold);letter-spacing:.05em}
+  .node .br{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+  .node.locked{opacity:.55;filter:saturate(.5)}
+  .node.available{border-color:var(--gold);box-shadow:0 0 0 1px rgba(216,177,90,.35),0 6px 22px rgba(216,177,90,.12)}
+  .node.unlocked{border-color:var(--r-uncommon);background:linear-gradient(180deg,#13241a,#0e1a12)}
+  .node.unlocked .cost{color:var(--r-uncommon)}
+  .node.unlocked::after{content:"\2713";position:absolute;top:-9px;right:-9px;width:22px;height:22px;border-radius:50%;background:var(--r-uncommon);color:#08120b;font-size:13px;font-weight:800;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .node.secret{border-style:dashed;border-color:#4a3f63;background:repeating-linear-gradient(45deg,#141020,#141020 8px,#171227 8px,#171227 16px)}
+  .node.secret .nm{color:#7a6f9c;letter-spacing:.12em;font-style:italic}
+  .node.secret .rar .dot{background:#4a3f63!important}
+  .node.gated::before{content:"\26ef";position:absolute;top:-8px;left:-8px;width:20px;height:20px;border-radius:50%;background:#7a5fae;color:#0d0b14;font-size:11px;display:grid;place-items:center;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+
+  /* detail popover (shared) */
+  #detail{position:fixed;z-index:30;width:312px;max-width:90vw;background:linear-gradient(180deg,#1d1729,#140f1f);border:1px solid var(--line);border-radius:9px;padding:16px 17px;box-shadow:0 18px 50px rgba(0,0,0,.6);display:none}
+  #detail .rar{font-size:10px;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:7px;margin-bottom:8px}
+  #detail .rar .dot{width:9px;height:9px;border-radius:50%}
+  #detail h3{margin:0 0 4px;font-size:19px}
+  #detail .sub{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:11px}
+  #detail p{margin:0 0 13px;font-size:13.5px;line-height:1.5;color:#cfc7b4;max-height:300px;overflow-y:auto}
+  #detail .reqs{font-size:12px;color:var(--ink-dim);margin-bottom:13px;line-height:1.6}
+  #detail .reqs .rq-head{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--line-dim);padding-bottom:5px;margin-bottom:7px}
+  #detail .reqs .rq-row{margin-bottom:5px}
+  #detail .reqs .rq-label{display:inline-block;font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);margin-right:6px;border:1px solid var(--line-dim);border-radius:3px;padding:1px 6px}
+  #detail .reqs .rq-verb{color:#b9a6dc;font-size:11px}
+  #detail .reqs .rq-none{color:var(--ink-dim);font-style:italic}
+  #detail .reqs .ok{color:var(--r-uncommon)} #detail .reqs .no{color:var(--r-mythical)} #detail .reqs .flagno{color:#b9a6dc}
+  #detail .act{display:flex;gap:9px}
+  #detail button{flex:1;font:inherit;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:10px;border-radius:4px;cursor:pointer;border:1px solid var(--line);background:var(--panel);color:var(--ink);transition:.15s}
+  #detail button.primary{background:var(--gold);color:#1a1305;border-color:var(--gold);font-weight:700}
+  #detail button.primary.soul{background:var(--soul);color:#15102a}
+  #detail button.primary:disabled{opacity:.4;cursor:not-allowed}
+  #detail button.refund:hover{border-color:var(--r-mythical);color:var(--r-mythical)}
+
+  /* SOUL selection cards strip */
+  /* SOUL composer */
+  #soulComposer{position:absolute;inset:0;overflow-y:auto;padding:28px 28px 60px;max-width:1100px;margin:0 auto;left:0;right:0}
+  #soulHeader{display:flex;align-items:flex-start;gap:18px;padding:18px 22px;border:1px solid var(--soul-deep);border-radius:10px;background:linear-gradient(180deg,#1a1326,#120d1c);box-shadow:0 8px 24px rgba(122,95,174,.15);margin-bottom:18px;flex-wrap:wrap}
+  #soulHeader .nm{display:flex;flex-direction:column;gap:4px;min-width:240px;flex:1}
+  #soulHeader .nm small{font-size:9px;letter-spacing:.24em;text-transform:uppercase;color:var(--soul-deep);order:-1;margin-bottom:2px}
+  #soulHeader .nm input{font:inherit;font-size:22px;background:transparent;border:none;border-bottom:1px solid var(--line);color:var(--soul);outline:none;padding:4px 0;font-weight:600}
+  #soulHeader .nm input:focus{border-bottom-color:var(--soul)}
+  #soulHeader .nm input::placeholder{color:var(--ink-dim);font-style:italic;font-weight:400}
+  /* synergy pip extensions */
+  .synpip{cursor:pointer}
+  .synpip.needs{border-color:var(--gold);background:rgba(216,177,90,.1);color:var(--gold)}
+  .synpip.needs:hover{background:rgba(216,177,90,.18)}
+  .synpip .needico{display:inline-flex;align-items:center;justify-content:center;width:14px;height:14px;border-radius:50%;background:var(--gold);color:#1a1305;font-size:9px;font-weight:700;margin-left:4px}
+  /* synergy picker option list */
+  .synopts{display:flex;flex-direction:column;gap:9px;margin-bottom:14px;max-height:340px;overflow-y:auto}
+  .synopt{border:1px solid var(--line);border-radius:7px;padding:11px 13px;background:rgba(122,95,174,.04);cursor:pointer;transition:.15s}
+  .synopt:hover{border-color:var(--soul);background:rgba(122,95,174,.1)}
+  .synopt.selected{border-color:var(--soul);background:rgba(122,95,174,.16)}
+  .synopt .so-head{display:flex;align-items:center;gap:8px;margin-bottom:5px}
+  .synopt .so-head b{flex:1;font-size:13.5px;color:var(--ink)}
+  .synopt .so-head .dot{width:9px;height:9px;border-radius:50%;flex:none}
+  .synopt .so-rar{font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+  .synopt .so-sel{font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--soul);border:1px solid var(--soul-deep);border-radius:3px;padding:1px 6px;margin-left:6px}
+  .synopt p{margin:0;font-size:12px;line-height:1.45;color:#cfc7b4}
+  #soulHeader .rarbadge{display:flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid var(--line);border-radius:999px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);background:rgba(0,0,0,.25)}
+  #soulHeader .rarbadge .dot{width:10px;height:10px;border-radius:50%}
+  #soulHeader .stats{display:flex;gap:14px;font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim);align-self:center}
+  #soulHeader .stats b{color:var(--soul);font-size:13px;display:block;letter-spacing:.04em;text-transform:none}
+
+  #soulSynergies{margin-bottom:18px;display:flex;flex-wrap:wrap;gap:9px}
+  .synpip{display:inline-flex;align-items:center;gap:6px;padding:5px 11px;border-radius:999px;border:1px solid var(--soul-deep);background:rgba(122,95,174,.08);font-size:11px;color:var(--soul);transition:.15s;cursor:default}
+  .synpip:hover{background:rgba(122,95,174,.16)}
+  .synpip .stier{font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);padding-right:6px;border-right:1px solid var(--line-dim);margin-right:3px}
+
+  #soulSlots{display:grid;grid-template-columns:1fr;gap:14px;margin-bottom:24px}
+  .slotrow{border:1px solid var(--line-dim);border-radius:9px;padding:14px 16px;background:rgba(122,95,174,.04)}
+  .slotrow > h3{font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--soul);margin:0 0 10px;display:flex;align-items:center;gap:8px}
+  .slotrow > h3 .cnt{font-size:10px;color:var(--ink-dim);letter-spacing:.1em;font-weight:400}
+  .slotgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+  .slotbox{border:1px dashed var(--line);border-radius:7px;padding:11px 13px;min-height:84px;background:rgba(0,0,0,.18);position:relative;transition:.15s}
+  .slotbox.filled{border-style:solid;border-color:var(--soul-deep);background:linear-gradient(180deg,#1a1326,#120d1c)}
+  .slotbox.empty{display:flex;align-items:center;justify-content:center;color:var(--ink-dim);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-style:italic;cursor:default}
+  .slotbox .er{display:flex;align-items:center;gap:6px;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:5px}
+  .slotbox .er .dot{width:8px;height:8px;border-radius:50%}
+  .slotbox .ename{font-size:13.5px;font-weight:600;margin-bottom:4px;color:var(--ink)}
+  .slotbox .edesc{font-size:11.5px;line-height:1.4;color:#cfc7b4;margin-bottom:8px}
+  .slotbox .etags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px}
+  .slotbox .tagchip{font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:1px 6px;border-radius:3px;border:1px solid var(--line-dim);color:var(--ink-dim)}
+  .slotbox .tagchip.theme{border-color:var(--soul-deep);color:var(--soul)}
+  .slotbox .unbtn{font:inherit;font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 9px;border-radius:4px;border:1px solid var(--line);background:var(--panel);color:var(--ink-dim);cursor:pointer;transition:.15s}
+  .slotbox .unbtn:hover{border-color:var(--r-mythical);color:var(--r-mythical)}
+
+  /* library */
+  #soulLibrary h3{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);margin:0 0 12px;border-top:1px solid var(--line-dim);padding-top:18px}
+  .libfilters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px;align-items:center}
+  .libfilters .group{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+  .libfilters .glbl{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim);margin-right:4px}
+  .libgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+  .libcard{border:1px solid var(--line);border-radius:7px;padding:11px 13px;background:linear-gradient(180deg,var(--panel),#120e1b);cursor:pointer;transition:.15s;position:relative}
+  .libcard:hover{border-color:var(--soul);transform:translateY(-1px);box-shadow:0 4px 14px rgba(122,95,174,.18)}
+  .libcard.slotted{border-color:var(--r-uncommon);background:linear-gradient(180deg,#13241a,#0e1a12);cursor:default}
+  .libcard.slotted:hover{transform:none;box-shadow:none}
+  .libcard.slotted::after{content:"slotted";position:absolute;bottom:8px;right:10px;font-size:8px;letter-spacing:.18em;text-transform:uppercase;color:var(--r-uncommon)}
+  .libcard.unavailable{opacity:.5;filter:saturate(.55);cursor:default}
+  .libcard .top{display:flex;align-items:center;justify-content:space-between;gap:6px;margin-bottom:5px}
+  .libcard .ty{font-size:8.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-dim);padding:2px 7px;border-radius:3px;border:1px solid var(--line-dim)}
+  .libcard .ty.passive{color:#9ec6ff;border-color:#3a5078}
+  .libcard .ty.active{color:#ff9a6c;border-color:#7a4a32}
+  .libcard .ty.sign{color:#b9a6dc;border-color:#5a4a7a}
+  .libcard .rar{font-size:8.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);display:flex;align-items:center;gap:5px}
+  .libcard .rar .dot{width:8px;height:8px;border-radius:50%}
+  .libcard .ename{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:5px}
+  .libcard .edesc{font-size:11.5px;line-height:1.4;color:#cfc7b4;margin-bottom:7px}
+  .libcard .etags{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px}
+  .libcard .tagchip{font-size:8.5px;letter-spacing:.12em;text-transform:uppercase;padding:1px 6px;border-radius:3px;border:1px solid var(--line-dim);color:var(--ink-dim)}
+  .libcard .tagchip.theme{border-color:var(--soul-deep);color:var(--soul)}
+  .libcard .src{font-size:9px;letter-spacing:.06em;color:var(--ink-dim);font-style:italic}
+  .libcard .src.flag{color:#b9a6dc;font-style:normal}
+  .libcard .req{font-size:10.5px;color:#b9a6dc;margin-top:5px}
+  .signflavor{font-size:11px;color:var(--soul);margin:4px 0 8px;padding:5px 8px;background:rgba(122,95,174,.07);border-left:2px solid var(--soul-deep);border-radius:0 4px 4px 0;line-height:1.35}
+
+  /* reslot confirm modal */
+  #reslotModal{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.65);backdrop-filter:blur(4px);padding:20px}
+  #reslotModal.open{display:flex}
+  #reslotModal .box{max-width:440px;width:100%;background:linear-gradient(180deg,#1d1729,#140f1f);border:1px solid var(--soul-deep);border-radius:10px;padding:22px 24px;box-shadow:0 20px 60px rgba(0,0,0,.6)}
+  #reslotModal h3{margin:0 0 6px;font-size:18px;color:var(--soul)}
+  #reslotModal .sub{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:14px}
+  #reslotModal p{font-size:13.5px;line-height:1.55;color:#cfc7b4;margin:0 0 16px}
+  #reslotModal p b{color:var(--ink)}
+  #reslotModal .cost{padding:11px 14px;border:1px solid var(--line);border-radius:6px;background:rgba(122,95,174,.06);margin-bottom:18px}
+  #reslotModal .cost b{display:block;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--soul);margin-bottom:3px;font-weight:500}
+  #reslotModal .cost span{font-size:12.5px;color:#cfc7b4}
+  #reslotModal .act{display:flex;gap:10px;justify-content:flex-end}
+  #reslotModal button{font:inherit;font-size:11px;letter-spacing:.12em;text-transform:uppercase;padding:9px 16px;border-radius:4px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;transition:.15s}
+  #reslotModal button:hover{border-color:var(--ink)}
+  #reslotModal button.primary{background:var(--soul);color:#15102a;border-color:var(--soul);font-weight:700}
+  #reslotModal button.primary:disabled{opacity:.4;cursor:not-allowed}
+  #reslotModal button.primary:not(:disabled):hover{filter:brightness(1.1)}
+
+  /* TRAIT tab */
+  #traitView{position:fixed;inset:0;top:106px;display:none;overflow-y:auto;padding:40px 22px}
+  #traitView.active{display:block}
+  .traitwrap{max-width:560px;margin:0 auto}
+  .traitwrap h2{font-size:14px;letter-spacing:.22em;text-transform:uppercase;color:var(--trait);margin:0 0 4px}
+  .traitwrap .note{font-size:12px;color:var(--ink-dim);line-height:1.55;margin:0 0 22px}
+  .traitcard{border:1px solid var(--line);border-radius:11px;padding:22px;background:linear-gradient(180deg,#15161f,#0f1016);box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .traitcard .trar{font-size:10px;letter-spacing:.22em;text-transform:uppercase;display:flex;align-items:center;gap:7px;margin-bottom:9px;color:var(--ink-dim)}
+  .traitcard .trar .dot{width:10px;height:10px;border-radius:50%}
+  .traitcard h3{margin:0 0 4px;font-size:24px}
+  .traitcard .cat{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--trait);margin-bottom:14px}
+  .traitcard p{font-size:14px;line-height:1.55;color:#cfc7b4;margin:0 0 16px}
+  .traitcard .tiers{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+  .traitcard .tierpip{font-size:9px;letter-spacing:.12em;text-transform:uppercase;padding:3px 9px;border-radius:999px;border:1px solid var(--line-dim);color:var(--ink-dim)}
+  .traitcard .tierpip.have{border-color:var(--trait);color:var(--trait);background:rgba(95,166,160,.08)}
+  .traitcard .tierpip.cur{background:var(--trait);color:#0c1716;border-color:var(--trait);font-weight:700}
+  .traitcard .upg{display:flex;gap:10px;align-items:center}
+  .traitcard .upg button{font:inherit;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:11px 16px;border-radius:5px;cursor:pointer;border:1px solid var(--trait);background:var(--trait);color:#0c1716;font-weight:700;transition:.15s}
+  .traitcard .upg button:disabled{opacity:.4;cursor:not-allowed;background:var(--panel);color:var(--ink-dim);border-color:var(--line)}
+  .traitcard .upg .max{font-size:12px;color:var(--ink-dim);font-style:italic}
+  .traitpick{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:9px;margin-top:8px}
+  .traitpick button{font:inherit;text-align:left;padding:11px 12px;border:1px solid var(--line);border-radius:7px;background:var(--panel);color:var(--ink);cursor:pointer;transition:.15s}
+  .traitpick button:hover{border-color:var(--trait)}
+  .traitpick button .tn{font-size:13px;display:block;margin-bottom:3px}
+  .traitpick button .tc{font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-dim)}
+
+  /* DM panel (story flags only) */
+  #dmPanel{position:fixed;top:0;right:0;bottom:0;width:340px;max-width:92vw;z-index:40;background:linear-gradient(180deg,#191225,#120d1c);border-left:1px solid #3a2f55;box-shadow:-12px 0 40px rgba(0,0,0,.5);transform:translateX(100%);transition:transform .25s;padding:20px;overflow-y:auto}
+  #dmPanel.open{transform:translateX(0)}
+  #dmPanel h2{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:#b9a6dc;margin:0 0 4px}
+  #dmPanel .note{font-size:11.5px;color:var(--ink-dim);line-height:1.5;margin:0 0 16px}
+  #dmPanel .flag{display:flex;gap:10px;align-items:flex-start;padding:11px 12px;border:1px solid var(--line-dim);border-radius:6px;margin-bottom:9px;cursor:pointer;transition:.15s}
+  #dmPanel .flag:hover{border-color:#5a4a7a}
+  #dmPanel .flag.on{border-color:#7a5fae;background:rgba(122,95,174,.1)}
+  #dmPanel .flag input{margin-top:2px;accent-color:#a464d6;width:16px;height:16px;flex:none}
+  #dmPanel .flag .ft{display:block;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:#8a7fad;margin-bottom:4px}
+  #dmPanel .flag .fl{display:block;font-size:13px;color:var(--ink);line-height:1.35;margin-bottom:3px}
+  #dmPanel .flag .fh{display:block;font-size:11px;color:var(--ink-dim);font-style:italic;margin-top:2px}
+  #dmPanel .closeX{position:absolute;top:16px;right:16px;background:none;border:none;color:var(--ink-dim);font-size:22px;cursor:pointer}
+  #dmPanel .closeX:hover{color:var(--ink)}
+
+  .hint{position:fixed;bottom:12px;left:50%;transform:translateX(-50%);z-index:15;font-size:11px;letter-spacing:.1em;color:var(--ink-dim);background:rgba(13,11,20,.7);padding:6px 14px;border-radius:999px;border:1px solid var(--line-dim);pointer-events:none}
+  .zoom{position:fixed;right:18px;bottom:18px;z-index:18;display:flex;flex-direction:column;gap:6px}
+  .zoom button{width:38px;height:38px;font-size:18px;border-radius:6px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer}
+  .zoom button:hover{border-color:var(--gold);color:var(--gold)}
+  #fileIn{display:none}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand"><b>Grand Terra Online</b><span>Talent &middot; Soul &middot; Trait</span></div>
+  <div class="tabs">
+    <button class="tab active" data-tab="talents">Talents</button>
+    <button class="tab soul" data-tab="soul">Soul</button>
+    <button class="tab trait" data-tab="trait">Trait</button>
+  </div>
+  <div class="pts levelpts" id="ptsLevel"><small>Level</small><input id="lvlInput" type="number" min="1" max="100" value="1"/></div>
+  <div class="pts" id="ptsTalent"><small>Talent&nbsp;Pts</small><input id="tpInput" type="number" min="0" value="20"/><span class="sp" id="tpSpent">0 spent</span></div>
+  <div class="pts soulpts" id="ptsSoul" style="display:none"><small>Soul&nbsp;Pts</small><input id="spInput" type="number" min="0" value="10"/><span class="sp" id="spSpent">0 spent</span></div>
+  <div class="pts traitpts" id="ptsTrait" style="display:none"><small>Trait&nbsp;Pts</small><input id="trpInput" type="number" min="0" value="6"/><span class="sp" id="trpSpent">0 spent</span></div>
+  <div class="spacer"></div>
+  <button class="tool dm" id="btnDM">DM &middot; Flags</button>
+  <button class="tool" id="btnExport">Export</button>
+  <button class="tool" id="btnImport">Import</button>
+  <button class="tool danger" id="btnReset">Reset</button>
+  <input type="file" id="fileIn" accept=".json,application/json"/>
+</header>
+
+<div class="subbar" id="subbar"></div>
+
+<!-- TALENTS view -->
+<div class="view active" id="talentView">
+  <div id="stage"><div class="worldwrap" id="world"><svg class="wires" id="wires"></svg></div></div>
+</div>
+
+<!-- SOUL view (effect composition) -->
+<div class="view" id="soulView">
+  <div id="soulComposer">
+    <div id="soulHeader"></div>
+    <section id="soulSynergies"></section>
+    <section id="soulSlots"></section>
+    <section id="soulLibrary"></section>
+  </div>
+</div>
+
+<!-- TRAIT view -->
+<div id="traitView">
+  <div class="traitwrap" id="traitWrap"></div>
+</div>
+
+<div id="detail"></div>
+
+<div id="reslotModal"></div>
+
+<div id="dmPanel">
+  <button class="closeX" id="dmClose">&times;</button>
+  <h2>DM &middot; Story Flags</h2>
+  <p class="note">Check a flag when the party earns it (a quest completed, a deed done, an item found). Any talent or soul node gated on that flag will unlock or reveal. Flags save and export with the build.</p>
+  <div id="flagList"></div>
+</div>
+
+<div class="zoom" id="zoomBox"><button id="zIn">+</button><button id="zOut">&minus;</button><button id="zFit" title="Fit" style="font-size:12px">&#10530;</button></div>
+<div class="hint" id="hint">Drag to pan &middot; scroll to zoom &middot; click a node for details</div>
+
+<script>
+/* ================================================================
+   DATA BOOTLOADER
+   Fetches JSON data files, then runs the app engine below.
+   The engine assumes FLAGS, TALENT_NODES, SOUL_CATEGORIES,
+   SOUL_THEMES, SOUL_EFFECTS, SOUL_SYNERGIES, SOUL_SLOT_AUTO,
+   SOUL_SLOT_FLAGS, and TRAITS are available as globals.
+   ================================================================ */
+
+// Loading screen while fetches resolve
+(function showLoader(){
+  const d=document.createElement('div');
+  d.id='bootLoader';
+  d.style.cssText='position:fixed;inset:0;z-index:9999;background:#0d0b14;color:#d8b15a;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif';
+  d.innerHTML='<div style="font-size:18px;letter-spacing:.22em;text-transform:uppercase;margin-bottom:14px">Grand Terra Online</div><div id="bootMsg" style="font-size:12px;letter-spacing:.14em;color:#9b927f">loading data...</div>';
+  document.body.appendChild(d);
+})();
+
+let FLAGS, TALENT_NODES, SOUL_CATEGORIES, SOUL_THEMES, SOUL_EFFECTS, SOUL_SYNERGIES, SOUL_SLOT_AUTO, SOUL_SLOT_FLAGS, TRAITS;
+
+async function bootData(){
+  const files=[
+    ['flags.json','FLAGS'],
+    ['talents.json','TALENT_NODES'],
+    ['soul-categories.json','SOUL_CATEGORIES'],
+    ['soul-themes.json','SOUL_THEMES'],
+    ['soul-effects.json','SOUL_EFFECTS'],
+    ['soul-synergies.json','SOUL_SYNERGIES'],
+    ['soul-slot-growth.json','SLOT_GROWTH'],
+    ['traits.json','TRAITS'],
+  ];
+  const bootMsg=document.getElementById('bootMsg');
+  const results={};
+  for(const [file,key] of files){
+    if(bootMsg)bootMsg.textContent='loading '+file+'...';
+    try{
+      const r=await fetch('data/'+file,{cache:'no-cache'});
+      if(!r.ok) throw new Error(r.status+' '+r.statusText);
+      results[key]=await r.json();
+    }catch(e){
+      if(bootMsg){bootMsg.textContent='Failed to load '+file+': '+e.message;bootMsg.style.color='#d6425a';}
+      throw e;
+    }
+  }
+  FLAGS=results.FLAGS;
+  TALENT_NODES=results.TALENT_NODES;
+  SOUL_CATEGORIES=results.SOUL_CATEGORIES;
+  SOUL_THEMES=results.SOUL_THEMES;
+  SOUL_EFFECTS=results.SOUL_EFFECTS;
+  SOUL_SYNERGIES=results.SOUL_SYNERGIES;
+  SOUL_SLOT_AUTO=results.SLOT_GROWTH.auto||[];
+  SOUL_SLOT_FLAGS=results.SLOT_GROWTH.flags||[];
+  TRAITS=results.TRAITS;
+  // Remove loading screen
+  const loader=document.getElementById('bootLoader');
+  if(loader)loader.remove();
+}
+
+bootData().then(()=>{
+  runApp();
+}).catch(err=>{
+  console.error('Boot failed:',err);
+});
+
+function runApp(){
+/* ================================================================
+   2) ENGINE
+   ================================================================ */
+const RARITY_ORDER=["common","uncommon","rare","epic","royal","relic","legendary","mythical","deity"];
+const rarColor=r=>getComputedStyle(document.documentElement).getPropertyValue("--r-"+r).trim()||"#999";
+const flagById={}; FLAGS.forEach(f=>flagById[f.id]=f);
+const effectById={}; SOUL_EFFECTS.forEach(e=>effectById[e.id]=e);
+const traitById={}; TRAITS.forEach(t=>traitById[t.id]=t);
+
+const FLAG_TYPE_LABEL={quest:"Complete",boss:"Defeat",deed:"Accomplish",item:"Obtain",rank:"Reach",location:"Discover",story:"Story"};
+function flagLabelFor(f){const t=(f&&f.type)?f.type.toLowerCase():"story";return FLAG_TYPE_LABEL[t]||(t.charAt(0).toUpperCase()+t.slice(1));}
+
+const COL_W=230, ROW_H=132, BRANCH_GAP=70, PAD_X=140, PAD_Y=90;
+let state=loadState();
+
+/* ---------- generic tree machinery (works for talents AND a soul) ---------- */
+function makeTree(opts){
+  // opts: {nodes, worldEl, wiresEl, stageEl, getUnlocked, setUnlocked, getPts, setPts, isSoul}
+  const nodeById={}; opts.nodes.forEach(n=>nodeById[n.id]=n);
+  function depthOf(n,seen={}){ if(seen[n.id]!==undefined)return seen[n.id]; if(!n.prereq||!n.prereq.length)return seen[n.id]=0; let d=0; n.prereq.forEach(pid=>{if(nodeById[pid])d=Math.max(d,depthOf(nodeById[pid],seen)+1)}); return seen[n.id]=d; }
+  const dc={}; opts.nodes.forEach(n=>n._depth=depthOf(n,dc));
+  const branches=[...new Set(opts.nodes.map(n=>n.branch))];
+  function layout(){
+    /* Parent-anchored layout:
+       - Nodes are placed depth by depth (left to right).
+       - Depth-0 nodes stack top-to-bottom within their branch.
+       - Deeper nodes prefer the average Y of their parents.
+       - If that Y slot is occupied, we slide DOWN until we find one.
+       - Each branch keeps its own vertical band; the branch's height
+         grows to accommodate its widest column.
+       This drastically reduces crossing wires vs. plain row-counter
+       stacking, especially when a parent has many children.
+    */
+    const V_STEP=ROW_H;              // vertical spacing between siblings
+    const MIN_GAP=V_STEP*0.9;        // min distance between two nodes in the same column
+    const nodeById={}; opts.nodes.forEach(n=>nodeById[n.id]=n);
+    let y=PAD_Y;
+    branches.forEach(b=>{
+      const branchTop=y;
+      const inB=opts.nodes.filter(n=>n.branch===b);
+      const byD={}; inB.forEach(n=>{(byD[n._depth]=byD[n._depth]||[]).push(n)});
+      const depths=Object.keys(byD).map(Number).sort((a,c)=>a-c);
+      // Track placed y values per depth column so we can avoid overlaps.
+      const placedByDepth={};
+      depths.forEach(d=>{ placedByDepth[d]=[]; });
+      // Depth 0 first: simple stack.
+      (byD[0]||[]).forEach((n,i)=>{
+        n._y=branchTop + i*V_STEP;
+        placedByDepth[0].push(n._y);
+      });
+      // Deeper depths: anchor to parents.
+      depths.filter(d=>d>0).forEach(d=>{
+        const arr=byD[d];
+        // Sort children so those with earlier-y parents come first;
+        // roughly preserves top-to-bottom reading order.
+        arr.sort((a,c)=>{
+          const ay=avgParentY(a),cy=avgParentY(c);
+          if(ay===cy) return 0; return ay-cy;
+        });
+        arr.forEach(n=>{
+          let want=avgParentY(n);
+          if(want===null) want=branchTop; // no parents in-branch, fall back
+          // Slide down until we find a free slot in this depth column.
+          const placed=placedByDepth[d];
+          let y2=Math.max(want,branchTop);
+          for(let guard=0;guard<200;guard++){
+            const clash=placed.some(py=>Math.abs(py-y2)<MIN_GAP);
+            if(!clash)break;
+            y2+=MIN_GAP*0.5;
+          }
+          n._y=y2;
+          placed.push(y2);
+        });
+      });
+      function avgParentY(n){
+        const ps=(n.prereq||[]).map(pid=>nodeById[pid]).filter(p=>p&&p._y!==undefined);
+        if(!ps.length)return null;
+        return ps.reduce((s,p)=>s+p._y,0)/ps.length;
+      }
+      // Set X positions and compute branch bottom.
+      let branchBottom=branchTop;
+      inB.forEach(n=>{
+        n._x=PAD_X+n._depth*COL_W;
+        if(n._y+V_STEP>branchBottom) branchBottom=n._y+V_STEP;
+      });
+      y=branchBottom+BRANCH_GAP;
+    });
+    opts.worldEl._height=y;
+  }
+  layout();
+  function prereqMet(n){return (n.prereq||[]).every(pid=>opts.getUnlocked().has(pid))}
+  function flagsMet(n){return (n.flags||[]).every(fid=>state.flags.has(fid))}
+  function levelMet(n){return !n.levelReq || (state.level||1)>=n.levelReq}
+  function fullyMet(n){return prereqMet(n)&&flagsMet(n)&&levelMet(n)}
+  function hiddenSecret(n){return n.secret&&!fullyMet(n)}
+  function isGated(n){return n.flags&&n.flags.length>0}
+
+  function render(){
+    const maxDepth=Math.max(...opts.nodes.map(n=>n._depth),0);
+    let svg="";
+    opts.nodes.forEach(n=>{
+      if(hiddenSecret(n)&&(n.hideStyle||"blank")==="invisible")return;
+      (n.prereq||[]).forEach(pid=>{const p=nodeById[pid];if(!p)return;if(hiddenSecret(p)&&(p.hideStyle||"blank")==="invisible")return;
+        const met=opts.getUnlocked().has(pid),x1=p._x,y1=p._y,x2=n._x,y2=n._y,mx=(x1+x2)/2;
+        svg+=`<path class="wire ${met?'met':''}" data-branch="${n.branch}" d="M${x1} ${y1} C ${mx} ${y1}, ${mx} ${y2}, ${x2} ${y2}"/>`;});
+    });
+    opts.wiresEl.innerHTML=svg;
+    opts.wiresEl.setAttribute("width",PAD_X+(maxDepth+1)*COL_W+200);
+    opts.wiresEl.setAttribute("height",opts.worldEl._height+120);
+    [...opts.worldEl.querySelectorAll(".node")].forEach(e=>e.remove());
+    opts.nodes.forEach(n=>{
+      if(hiddenSecret(n)&&(n.hideStyle||"blank")==="invisible")return;
+      const el=document.createElement("div");
+      const blank=hiddenSecret(n), unlocked=opts.getUnlocked().has(n.id), avail=!unlocked&&fullyMet(n)&&!blank;
+      el.className="node "+(blank?"secret ":"")+(isGated(n)?"gated ":"")+(unlocked?"unlocked":(avail?"available":"locked"));
+      el.style.left=n._x+"px"; el.style.top=n._y+"px";
+      if(blank){ el.innerHTML=`<div class="rar"><span class="dot"></span>Secret</div><div class="nm">${n.hint?"&#10022;":"? ? ?"}</div><div class="meta"><span class="cost">&mdash;</span><span class="br">${n.branch}</span></div>`; }
+      else { const c=rarColor(n.rarity); el.innerHTML=`<div class="rar"><span class="dot" style="background:${c}"></span>${n.rarity}</div><div class="nm">${n.name}</div><div class="meta"><span class="cost">${n.cost} ${opts.isSoul?'SP':'TP'}</span><span class="br">${n.branch}</span></div>`; }
+      el.onclick=ev=>{ev.stopPropagation();openDetail(n,el,blank)};
+      opts.worldEl.appendChild(el);
+    });
+    applyFilter();
+  }
+  function spent(){let s=0;opts.getUnlocked().forEach(id=>{if(nodeById[id])s+=nodeById[id].cost});return s}
+  function reqLines(n,blank){
+    let rows=[];
+    if(n.prereq&&n.prereq.length){const parts=n.prereq.map(pid=>{const p=nodeById[pid],ok=opts.getUnlocked().has(pid);const nm=p?((hiddenSecret(p)&&(p.hideStyle||'blank')!=='invisible')?'???':p.name):pid;return `<span class="${ok?'ok':'no'}">${nm}</span>`;});rows.push(`<span class="rq-label">Prerequisite${n.prereq.length>1?'s':''}</span> `+parts.join(", "));}
+    if(n.flags&&n.flags.length){const parts=n.flags.map(fid=>{const f=flagById[fid],ok=state.flags.has(fid);const verb=flagLabelFor(f);const lbl=f?f.label:fid;const shown=ok?lbl:(blank?"a hidden deed":lbl);return `<span class="rq-verb">${verb}:</span> <span class="${ok?'ok':'flagno'}">${shown}</span>`;});rows.push(parts.join("<br>"));}
+    if(n.reqText && !n.levelReq)rows.push(`<span class="rq-label">Other</span> ${n.reqText}`);
+    if(n.levelReq){const ok=(state.level||1)>=n.levelReq;rows.push(`<span class="rq-label">Level</span> <span class="${ok?'ok':'no'}">GTO level ${n.levelReq}+</span>`);}
+    if(!rows.length)return `<div class="rq-head">Requirements</div><div class="rq-none">None &mdash; a root node.</div>`;
+    return `<div class="rq-head">Requirements</div>`+rows.map(r=>`<div class="rq-row">${r}</div>`).join("");
+  }
+  function openDetail(n,el,blank){
+    if(blank){
+      detail.innerHTML=`<div class="rar" style="color:#8b82ad"><span class="dot" style="background:#4a3f63"></span>Secret</div><h3 style="color:#8b82ad">Undiscovered</h3><div class="sub">${n.branch}</div><p>${n.hint?("<em>"+n.hint+"</em>"):"A hidden node lies here. Meet its requirements to reveal it."}</p><div class="reqs">${reqLines(n,true)}</div>`;
+    } else {
+      const c=rarColor(n.rarity),unlocked=opts.getUnlocked().has(n.id),met=fullyMet(n),afford=opts.getPts()>=n.cost,unit=opts.isSoul?'SP':'TP';
+      let btns=unlocked?`<button class="refund" data-act="refund" data-id="${n.id}">Refund (${n.cost} ${unit})</button>`:`<button class="primary ${opts.isSoul?'soul':''}" data-act="buy" data-id="${n.id}" ${(!met||!afford)?"disabled":""}>Unlock &middot; ${n.cost} ${unit}</button>`;
+      detail.innerHTML=`<div class="rar" style="color:${c}"><span class="dot" style="background:${c}"></span>${n.rarity}</div><h3>${n.name}</h3><div class="sub">${n.branch} &middot; ${n.cost} ${unit}</div><p>${n.desc}</p><div class="reqs">${reqLines(n,false)}</div><div class="act">${btns}</div>`;
+      const btn=detail.querySelector("button");
+      if(btn)btn.onclick=()=>{ const id=btn.dataset.id; if(btn.dataset.act==="buy")buy(id); else refund(id); };
+    }
+    const r=el.getBoundingClientRect(); let x=r.right+12,y=r.top;
+    if(x+330>window.innerWidth)x=r.left-324; if(x<8)x=8;
+    if(y+280>window.innerHeight)y=window.innerHeight-290; if(y<120)y=120;
+    detail.style.left=x+"px";detail.style.top=y+"px";detail.style.display="block";
+  }
+  function buy(id){const n=nodeById[id];if(!n||!fullyMet(n)||opts.getPts()<n.cost)return;opts.getUnlocked().add(id);opts.setPts(opts.getPts()-n.cost);closeDetail();api.refresh()}
+  function refund(id){const n=nodeById[id];if(!n)return;const dep=opts.nodes.filter(o=>opts.getUnlocked().has(o.id)&&(o.prereq||[]).includes(id));if(dep.length){alert("Refund "+dep.map(d=>d.name).join(", ")+" first \u2014 they depend on this.");return;}opts.getUnlocked().delete(id);opts.setPts(opts.getPts()+n.cost);closeDetail();api.refresh()}
+  function applyFilter(){
+    const f=(opts.isSoul?null:state.filter);
+    if(opts.isSoul){ [...opts.worldEl.querySelectorAll(".node")].forEach(el=>el.style.display=""); [...opts.wiresEl.querySelectorAll(".wire")].forEach(w=>w.style.display=""); return; }
+    [...opts.worldEl.querySelectorAll(".node")].forEach(el=>{const nm=el.querySelector(".br")?.textContent;el.style.display=(!f||nm===f)?"":"none"});
+    [...opts.wiresEl.querySelectorAll(".wire")].forEach(w=>{const b=w.getAttribute("data-branch");w.style.display=(!f||b===f)?"":"none"});
+  }
+  const api={ render, spent, branches, applyFilter, refresh:null, fit:null,
+    fitTo(stage){ const maxX=PAD_X+(Math.max(...opts.nodes.map(n=>n._depth),0)+1)*COL_W;const maxY=opts.worldEl._height;const vw=stage.clientWidth-80,vh=stage.clientHeight-80;let s=Math.max(Math.min(vw/maxX,vh/maxY,1.2),.35);return {scale:s}; } };
+  return api;
+}
+
+/* ---------- shared popover close ---------- */
+const detail=document.getElementById("detail");
+function closeDetail(){detail.style.display="none"}
+
+/* ---------- build talent tree ---------- */
+const world=document.getElementById("world"), wires=document.getElementById("wires"), stage=document.getElementById("stage");
+const talentTree=makeTree({nodes:TALENT_NODES,worldEl:world,wiresEl:wires,stageEl:stage,
+  getUnlocked:()=>state.talentUnlocked,setUnlocked:s=>state.talentUnlocked=s,
+  getPts:()=>state.tp,setPts:v=>state.tp=v,isSoul:false});
+
+/* ---------- SOUL COMPOSER ---------- */
+const soulHeader=document.getElementById("soulHeader");
+const soulSynergies=document.getElementById("soulSynergies");
+const soulSlotsEl=document.getElementById("soulSlots");
+const soulLibraryEl=document.getElementById("soulLibrary");
+
+/* Cost of an effect in Soul Points — mirrors talent cost scale by rarity. */
+const EFFECT_COST_BY_RARITY={common:1,uncommon:3,rare:6,epic:12,royal:20,relic:30,legendary:45,mythical:65,deity:90};
+function effectCost(eff){ return EFFECT_COST_BY_RARITY[eff.rarity]||0; }
+
+function soulSlotCaps(){
+  let cap={passive:0,active:0,sign:0};
+  const lvl=state.level||1;
+  // Only sum rows whose level threshold has been reached.
+  SOUL_SLOT_AUTO.forEach(row=>{
+    if((row.level||1)<=lvl){cap.passive+=row.passive||0;cap.active+=row.active||0;cap.sign+=row.sign||0;}
+  });
+  (SOUL_SLOT_FLAGS||[]).forEach(g=>{if(state.flags.has(g.flag)){cap.passive+=g.passive||0;cap.active+=g.active||0;cap.sign+=g.sign||0;}});
+  return cap;
+}
+function effectAvailable(eff){
+  const src=eff.source||"base";
+  if(src==="base"||src==="class"||src==="race"||src==="background"||src==="level")return true;
+  if(src==="flag")return (eff.flags||[]).every(fid=>state.flags.has(fid));
+  return true;
+}
+function effectSlottedIn(id){
+  for(const t of ["passive","active","sign"]){if((state.soulSlots[t]||[]).includes(id))return t;}
+  return null;
+}
+function soulRarity(){
+  const slotted=[...state.soulSlots.passive,...state.soulSlots.active,...state.soulSlots.sign];
+  if(!slotted.length)return null;
+  let best=-1;
+  slotted.forEach(id=>{const e=effectById[id];if(!e)return;const i=RARITY_ORDER.indexOf(e.rarity);if(i>best)best=i;});
+  return best>=0?RARITY_ORDER[best]:null;
+}
+/* Dominant theme among currently slotted effects — used to flavor Signs that have no theme. */
+function dominantTheme(){
+  const slotted=[...state.soulSlots.passive,...state.soulSlots.active,...state.soulSlots.sign];
+  const counts={};
+  slotted.forEach(id=>{const e=effectById[id];if(!e||!e.themes)return;e.themes.forEach(t=>{counts[t]=(counts[t]||0)+1});});
+  const entries=Object.entries(counts);
+  if(!entries.length)return null;
+  entries.sort((a,b)=>b[1]-a[1]);
+  return entries[0][0];
+}
+function activeSynergies(){
+  const slotted=[...state.soulSlots.passive,...state.soulSlots.active,...state.soulSlots.sign];
+  const themeCounts={};
+  slotted.forEach(id=>{const e=effectById[id];if(!e||!e.themes)return;e.themes.forEach(t=>{themeCounts[t]=(themeCounts[t]||0)+1});});
+  return (SOUL_SYNERGIES||[]).filter(g=>(themeCounts[g.theme]||0)>=g.threshold).map(g=>{
+    const opts=g.options||[];
+    let chosenId=(state.synergyChoices||{})[g.id];
+    if(!chosenId && opts.length===1) chosenId=opts[0].id;
+    const chosen=opts.find(o=>o.id===chosenId)||null;
+    return { group:g, chosen, count:themeCounts[g.theme]||0 };
+  });
+}
+/* Reslot cost — separate flat fee for the rite itself, on top of the effect's SP refund/charge. */
+function reslotCost(eff){
+  const r=eff.rarity;
+  if(r==="common"||r==="uncommon")return {sp:0,label:"Low-level priest",desc:"Modest gold, half-day rite. Available in most settlements."};
+  if(r==="rare"||r==="epic")return {sp:2,label:"Soul-shaper",desc:"A specialized NPC, faction temple, or master soul-shaper. Multi-day ritual."};
+  return {sp:5,label:"Unique rite",desc:"A unique NPC, deity-touched ritual, or quest-gated rite. Removing this is a major event."};
+}
+
+function renderSoul(){renderSoulHeader();renderSoulSynergies();renderSoulSlotsView();renderSoulLibrary();}
+
+function renderSoulHeader(){
+  const caps=soulSlotCaps(); const rar=soulRarity();
+  const rDot=rar?`<span class="dot" style="background:${rarColor(rar)}"></span>${rar}`:`<span class="dot" style="background:#3a3350"></span>unawakened`;
+  const slottedCount=state.soulSlots.passive.length+state.soulSlots.active.length+state.soulSlots.sign.length;
+  const capTotal=caps.passive+caps.active+caps.sign;
+  soulHeader.innerHTML=`
+    <div class="nm"><small>Soul Name</small><input id="soulNameIn" type="text" placeholder="Name your Soul..." value="${(state.soulName||'').replace(/"/g,'&quot;')}"/></div>
+    <div class="rarbadge">${rDot}</div>
+    <div class="stats"><div><b>${slottedCount} / ${capTotal}</b>slots filled</div><div><b>${activeSynergies().filter(s=>s.chosen).length} / ${activeSynergies().length}</b>synergies</div></div>`;
+  document.getElementById("soulNameIn").oninput=e=>{state.soulName=e.target.value;saveState();};
+}
+
+function renderSoulSynergies(){
+  const syns=activeSynergies();
+  if(!syns.length){soulSynergies.innerHTML=`<span style="font-size:11px;color:var(--ink-dim);font-style:italic">No synergies active &mdash; slot 3+ effects sharing a theme.</span>`;return;}
+  soulSynergies.innerHTML=syns.map(s=>{
+    const g=s.group, chosen=s.chosen;
+    const needsChoice=!chosen && (g.options||[]).length>1;
+    const rar=chosen?chosen.rarity:"rare";
+    const c=rarColor(rar);
+    const name=chosen?chosen.name:`${g.theme} &times; ${g.threshold} &mdash; choose`;
+    const cls=needsChoice?'synpip needs':'synpip';
+    return `<div class="${cls}" data-gid="${g.id}"><span class="stier">${g.tier||'minor'} &middot; ${g.theme}</span><span class="dot" style="background:${c};width:8px;height:8px;border-radius:50%"></span>${name}${needsChoice?' <span class="needico">!</span>':''}</div>`;
+  }).join("");
+  soulSynergies.querySelectorAll(".synpip").forEach(el=>el.onclick=()=>openSynergyPicker(el.dataset.gid));
+}
+
+function openSynergyPicker(gid){
+  const g=(SOUL_SYNERGIES||[]).find(x=>x.id===gid); if(!g)return;
+  const opts=g.options||[];
+  const chosenId=(state.synergyChoices||{})[g.id];
+  const modal=document.getElementById("reslotModal");
+  const optsHTML=opts.map(o=>{
+    const c=rarColor(o.rarity);
+    const sel=(o.id===chosenId)?'selected':'';
+    return `<div class="synopt ${sel}" data-oid="${o.id}">
+      <div class="so-head"><span class="dot" style="background:${c}"></span><b>${o.name}</b><span class="so-rar">${o.rarity}</span>${sel?'<span class="so-sel">chosen</span>':''}</div>
+      <p>${o.desc}</p>
+    </div>`;
+  }).join("");
+  modal.innerHTML=`<div class="box" style="max-width:520px">
+    <h3>${g.theme} &times; ${g.threshold} Synergy</h3>
+    <div class="sub">${g.tier||'minor'} &middot; ${opts.length} option${opts.length>1?'s':''}</div>
+    <p>${opts.length>1?'Choose which synergy is active. You can change this at any time.':'Your synergy is set; click to view its effect.'}</p>
+    <div class="synopts">${optsHTML}</div>
+    <div class="act"><button data-cancel>Close</button>${chosenId?'<button class="primary" data-clear>Clear Choice</button>':''}</div>
+  </div>`;
+  modal.classList.add("open");
+  modal.querySelector("[data-cancel]").onclick=()=>modal.classList.remove("open");
+  const clr=modal.querySelector("[data-clear]"); if(clr)clr.onclick=()=>{
+    if(!state.synergyChoices)state.synergyChoices={};
+    delete state.synergyChoices[g.id];
+    modal.classList.remove("open"); renderSoul(); saveState();
+  };
+  modal.querySelectorAll(".synopt").forEach(el=>el.onclick=()=>{
+    if(!state.synergyChoices)state.synergyChoices={};
+    state.synergyChoices[g.id]=el.dataset.oid;
+    modal.classList.remove("open"); renderSoul(); saveState();
+  });
+  modal.onclick=ev=>{if(ev.target===modal)modal.classList.remove("open");};
+}
+
+/* When a Sign has no theme, its cosmetic reads as tinged by the Soul's dominant theme.
+   Returns the effect's desc with a tiny italic addendum for themeless signs. */
+const THEME_FLAVOR={
+  Fire:"Its color and warmth carry a hint of flame.",
+  Water:"A cool, glimmering blue tint accompanies it.",
+  Earth:"A weight of dust and stone underlies it.",
+  Air:"It stirs and flickers as though caught in an unseen breeze.",
+  Radiant:"A soft golden light rims it.",
+  Necrotic:"A cold, ashen hue clings to it.",
+  Force:"An arcane shimmer traces its edges.",
+  Psychic:"An unsettling awareness accompanies it — those nearby half-remember it.",
+  Poison:"A faint sickly green tinges it.",
+  Physical:"It is grounded and tangibly present — no glow, no shimmer, just weight."
+};
+function signFlavorAddendum(e){
+  if(e.type!=="sign") return "";
+  if(e.themes && e.themes.length) return "";
+  const t=dominantTheme();
+  if(!t) return "";
+  const flavor=THEME_FLAVOR[t];
+  return flavor ? `<div class="signflavor"><em>${flavor}</em></div>` : "";
+}
+
+function renderSoulSlotsView(){
+  const caps=soulSlotCaps();
+  function emptyBox(type){return `<div class="slotbox empty">Empty ${type} slot</div>`;}
+  function rowHTML(type,label){
+    const cap=caps[type]||0, ids=state.soulSlots[type]||[];
+    let boxes="";
+    for(let i=0;i<cap;i++){
+      const eid=ids[i];
+      if(eid){const e=effectById[eid];if(!e){boxes+=emptyBox(type);continue;}
+        const c=rarColor(e.rarity);
+        const tags=[...(e.cats||[]).map(x=>`<span class="tagchip">${x}</span>`),...(e.themes||[]).map(x=>`<span class="tagchip theme">${x}</span>`)].join("");
+        const cost=effectCost(e);
+        boxes+=`<div class="slotbox filled" data-eid="${eid}">
+          <div class="er"><span class="dot" style="background:${c}"></span>${e.rarity} &middot; ${e.type} &middot; <span style="color:var(--soul)">${cost} SP</span></div>
+          <div class="ename">${e.name}</div>
+          <div class="edesc">${e.desc}</div>
+          ${signFlavorAddendum(e)}
+          <div class="etags">${tags}</div>
+          <button class="unbtn" data-unslot="${eid}">Unslot</button>
+        </div>`;
+      } else boxes+=emptyBox(type);
+    }
+    if(!cap)boxes=`<div style="font-size:11px;color:var(--ink-dim);font-style:italic;padding:6px 2px">No ${type} slots available yet.</div>`;
+    return `<div class="slotrow"><h3>${label}<span class="cnt">${ids.length} / ${cap}</span></h3><div class="slotgrid">${boxes}</div></div>`;
+  }
+  soulSlotsEl.innerHTML=rowHTML("passive","Passive")+rowHTML("active","Active")+rowHTML("sign","Sign");
+  soulSlotsEl.querySelectorAll("[data-unslot]").forEach(b=>b.onclick=()=>openReslot(b.dataset.unslot));
+}
+
+function renderSoulLibrary(){
+  if(!state.soulLibFilter)state.soulLibFilter={type:"",cat:"",theme:""};
+  const f=state.soulLibFilter;
+  const typeChips=["passive","active","sign"].map(t=>`<button class="chip ${f.type===t?'active':''}" data-flt="type" data-v="${t}">${t}</button>`).join("");
+  const catChips=SOUL_CATEGORIES.map(c=>`<button class="chip ${f.cat===c?'active':''}" data-flt="cat" data-v="${c}">${c}</button>`).join("");
+  const themeChips=SOUL_THEMES.map(t=>`<button class="chip ${f.theme===t?'active':''}" data-flt="theme" data-v="${t}">${t}</button>`).join("");
+  const visible=SOUL_EFFECTS.filter(e=>{
+    if(f.type&&e.type!==f.type)return false;
+    if(f.cat&&!(e.cats||[]).includes(f.cat))return false;
+    if(f.theme&&!(e.themes||[]).includes(f.theme))return false;
+    return true;
+  });
+  const cards=visible.map(e=>{
+    const avail=effectAvailable(e), slottedT=effectSlottedIn(e.id);
+    const cls=slottedT?"slotted":(avail?"":"unavailable");
+    const c=rarColor(e.rarity);
+    const tags=[...(e.cats||[]).map(x=>`<span class="tagchip">${x}</span>`),...(e.themes||[]).map(x=>`<span class="tagchip theme">${x}</span>`)].join("");
+    const srcLabel=(e.source||"base");
+    const srcCls=srcLabel==="flag"?"src flag":"src";
+    let req="";
+    if(srcLabel==="flag" && !avail){
+      const flagLabels=(e.flags||[]).map(fid=>{const fl=flagById[fid];return fl?(flagLabelFor(fl)+": "+fl.label):fid;}).join(" &middot; ");
+      req=`<div class="req">Locked &mdash; ${flagLabels}</div>`;
+    } else if(e.reqText){req=`<div class="req" style="color:var(--ink-dim);font-style:italic">${e.reqText}</div>`;}
+    return `<div class="libcard ${cls}" data-eid="${e.id}">
+      <div class="top"><span class="ty ${e.type}">${e.type}</span><span class="rar"><span class="dot" style="background:${c}"></span>${e.rarity} &middot; <span style="color:var(--soul)">${effectCost(e)} SP</span></span></div>
+      <div class="ename">${e.name}</div>
+      <div class="edesc">${e.desc}</div>
+      ${signFlavorAddendum(e)}
+      <div class="etags">${tags}</div>
+      <span class="${srcCls}">source: ${srcLabel}</span>
+      ${req}
+    </div>`;
+  }).join("");
+  soulLibraryEl.innerHTML=`<h3>Effect Library <span style="font-size:9px;color:var(--ink-dim);letter-spacing:.1em;font-weight:400;margin-left:6px">${visible.length} of ${SOUL_EFFECTS.length}</span></h3>
+    <div class="libfilters">
+      <div class="group"><span class="glbl">Type</span><button class="chip ${!f.type?'active':''}" data-flt="type" data-v="">all</button>${typeChips}</div>
+      <div class="group"><span class="glbl">Category</span><button class="chip ${!f.cat?'active':''}" data-flt="cat" data-v="">all</button>${catChips}</div>
+      <div class="group"><span class="glbl">Theme</span><button class="chip ${!f.theme?'active':''}" data-flt="theme" data-v="">all</button>${themeChips}</div>
+    </div>
+    <div class="libgrid">${cards}</div>`;
+  soulLibraryEl.querySelectorAll(".chip[data-flt]").forEach(b=>b.onclick=()=>{state.soulLibFilter[b.dataset.flt]=b.dataset.v;renderSoulLibrary();saveState();});
+  soulLibraryEl.querySelectorAll(".libcard").forEach(el=>el.onclick=()=>{
+    const eid=el.dataset.eid; const e=effectById[eid]; if(!e)return;
+    if(!effectAvailable(e))return;
+    if(effectSlottedIn(eid))return;
+    trySlot(eid);
+  });
+}
+
+function trySlot(eid){
+  const e=effectById[eid]; if(!e)return;
+  const type=e.type; const caps=soulSlotCaps();
+  const cap=caps[type]||0; const cur=state.soulSlots[type].length;
+  if(cap===0){alert("You don't have any "+type+" slots yet.");return;}
+  if(cur>=cap){alert("All "+type+" slots are full. Unslot one first.");return;}
+  const cost=effectCost(e);
+  if(state.sp<cost){alert("Not enough Soul Points. This effect costs "+cost+" SP; you have "+state.sp+".");return;}
+  state.sp-=cost;
+  state.spSpent=(state.spSpent||0)+cost;
+  state.soulSlots[type].push(eid);
+  if(!state.soulName)state.soulName="The "+(e.themes?.[0]||"Awakening")+" Soul";
+  renderSoul(); refreshPts(); saveState();
+}
+
+function openReslot(eid){
+  const e=effectById[eid]; if(!e)return;
+  const t=effectSlottedIn(eid); if(!t)return;
+  const rite=reslotCost(e);
+  const refund=effectCost(e);
+  const net=refund-rite.sp;
+  const modal=document.getElementById("reslotModal");
+  modal.innerHTML=`<div class="box">
+    <h3>Unslot ${e.name}?</h3>
+    <div class="sub">${e.rarity} ${e.type}</div>
+    <p>This removes <b>${e.name}</b> from your Soul. The effect remains in your library and can be re-slotted later. You are refunded the effect's SP cost, minus the rite's fee.</p>
+    <div class="cost"><b>Required: ${rite.label}</b><span>${rite.desc} Refund: <b style="color:var(--soul)">${refund} SP</b>. Rite fee: <b style="color:var(--r-mythical)">${rite.sp} SP</b>. <b style="color:var(--ink)">Net: ${net>=0?'+':''}${net} SP</b>.</span></div>
+    <div class="act"><button data-cancel>Cancel</button><button class="primary" data-confirm>Unslot</button></div>
+  </div>`;
+  modal.classList.add("open");
+  modal.querySelector("[data-cancel]").onclick=()=>modal.classList.remove("open");
+  modal.querySelector("[data-confirm]").onclick=()=>{
+    state.sp+=refund;
+    state.spSpent=Math.max(0,(state.spSpent||0)-refund);
+    if(rite.sp>0){
+      state.sp-=rite.sp;
+      state.spSpent=(state.spSpent||0)+rite.sp;
+    }
+    state.soulSlots[t]=state.soulSlots[t].filter(x=>x!==eid);
+    modal.classList.remove("open");
+    renderSoul(); refreshPts(); saveState();
+  };
+  modal.onclick=ev=>{if(ev.target===modal)modal.classList.remove("open");};
+}
+
+
+/* ---------- TRAIT tab ---------- */
+const traitWrap=document.getElementById("traitWrap");
+function renderTrait(){
+  if(!state.trait){
+    traitWrap.innerHTML=`<h2>Choose Your Trait</h2><p class="note">A Trait is who you were before the story began. You pick one, and it deepens in rarity as you spend Trait Points &mdash; it never changes into something else, it only grows truer.</p>
+      <div class="traitpick">`+TRAITS.map(t=>`<button data-trait="${t.id}"><span class="tn">${t.name}</span><span class="tc">${t.category} &middot; starts ${t.tiers[0].rarity}</span></button>`).join("")+`</div>`;
+    traitWrap.querySelectorAll("[data-trait]").forEach(b=>b.onclick=()=>{state.trait=b.dataset.trait;state.traitTier=0;renderTrait();saveState();});
+    return;
+  }
+  const t=traitById[state.trait]; const cur=state.traitTier||0; const tier=t.tiers[cur];
+  const c=rarColor(tier.rarity);
+  const next=t.tiers[cur+1];
+  const pips=t.tiers.map((ti,i)=>`<span class="tierpip ${i<cur?'have':''} ${i===cur?'cur':''}">${ti.rarity}</span>`).join("");
+  let upg;
+  if(next){ const afford=state.trp>=(next.cost||0);
+    upg=`<div class="upg"><button data-upg ${afford?'':'disabled'}>Deepen to ${next.rarity} &middot; ${next.cost} TrP</button>${afford?'':'<span class="max">Not enough Trait Points</span>'}</div>`;
+  } else { upg=`<div class="upg"><span class="max">Fully realized &mdash; this Trait has reached its deepest tier.</span></div>`; }
+  traitWrap.innerHTML=`<h2>Your Trait</h2><p class="note">Spend Trait Points to deepen your Trait. It grows stronger in place; it does not branch or change identity.</p>
+    <div class="traitcard">
+      <div class="trar"><span class="dot" style="background:${c}"></span>${tier.rarity}</div>
+      <h3>${t.name}</h3><div class="cat">${t.category}</div>
+      <p>${tier.desc}</p>
+      <div class="tiers">${pips}</div>
+      ${upg}
+      <div style="margin-top:16px"><button class="tool" data-change style="font-size:11px">Change Trait</button></div>
+    </div>`;
+  const ub=traitWrap.querySelector("[data-upg]");
+  if(ub)ub.onclick=()=>{ if(!next)return; if(state.trp<(next.cost||0))return; state.trp-=(next.cost||0); state.traitTier=cur+1; renderTrait(); refreshPts(); saveState(); };
+  traitWrap.querySelector("[data-change]").onclick=()=>{ const refund=traitSpent(); if(confirm("Change your Trait? This refunds the "+refund+" Trait Points you spent deepening "+t.name+", and you'll pick a new Trait at its starting tier.")){ state.trp+=refund; state.trait=null; state.traitTier=0; renderTrait(); refreshPts(); saveState(); } };
+}
+
+/* ---------- tabs ---------- */
+let activeTab="talents";
+const subbar=document.getElementById("subbar");
+function setTab(tab){
+  activeTab=tab;
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.tab===tab));
+  document.getElementById("talentView").classList.toggle("active",tab==="talents");
+  document.getElementById("soulView").classList.toggle("active",tab==="soul");
+  document.getElementById("traitView").classList.toggle("active",tab==="trait");
+  document.getElementById("ptsTalent").style.display=tab==="talents"?"":"none";
+  document.getElementById("ptsSoul").style.display=tab==="soul"?"":"none";
+  document.getElementById("ptsTrait").style.display=tab==="trait"?"":"none";
+  const showZoom=(tab!=="trait");
+  document.getElementById("zoomBox").style.display=showZoom?"":"none";
+  document.getElementById("hint").style.display=showZoom?"":"none";
+  buildSubbar();
+  closeDetail();
+  if(tab==="talents"){ talentTree.render(); }
+  if(tab==="soul"){ renderSoul(); }
+  if(tab==="trait"){ renderTrait(); }
+  saveState();
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>setTab(t.dataset.tab));
+
+function buildSubbar(){
+  if(activeTab==="talents"){
+    let html=`<button class="chip ${!state.filter?'active':''}" data-f="">All Branches</button>`;
+    talentTree.branches.forEach(b=>html+=`<button class="chip ${state.filter===b?'active':''}" data-f="${b}">${b}</button>`);
+    html+=`<div class="legend">`+RARITY_ORDER.map(r=>`<div class="l"><span class="dot" style="background:${rarColor(r)}"></span>${r}</div>`).join("")+`</div>`;
+    subbar.innerHTML=html;
+    subbar.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{
+      state.filter=c.dataset.f||"";
+      buildSubbar();
+      talentTree.applyFilter();
+      // Scroll/pan to the first node of the selected branch.
+      if(state.filter){
+        const first=TALENT_NODES.find(n=>n.branch===state.filter);
+        if(first && first._y!==undefined){
+          const cur=talentPZ.get();
+          const wantX=stage.clientWidth*0.25;
+          const wantY=stage.clientHeight*0.35;
+          talentPZ.set(cur.scale, wantX - first._x*cur.scale, wantY - first._y*cur.scale);
+        }
+      }
+      saveState();
+    });
+    subbar.style.display="";
+  } else if(activeTab==="soul"){
+    subbar.innerHTML=`<span class="soulpicker">Pick a Soul above &mdash; the chosen one's tree appears below. Greyed souls are unchosen.</span><div class="legend">`+RARITY_ORDER.map(r=>`<div class="l"><span class="dot" style="background:${rarColor(r)}"></span>${r}</div>`).join("")+`</div>`;
+    subbar.style.display="";
+  } else { subbar.innerHTML=""; subbar.style.display="none"; }
+}
+
+/* ---------- points header ---------- */
+const tpInput=document.getElementById("tpInput"), spInput=document.getElementById("spInput"), trpInput=document.getElementById("trpInput");
+const lvlInput=document.getElementById("lvlInput");
+function refreshPts(){
+  lvlInput.value=state.level||1;
+  tpInput.value=state.tp; document.getElementById("tpSpent").innerHTML="<b>"+talentTree.spent()+"</b> spent";
+  spInput.value=state.sp; document.getElementById("spSpent").innerHTML="<b>"+(state.spSpent||0)+"</b> spent";
+  trpInput.value=state.trp; document.getElementById("trpSpent").innerHTML="<b>"+traitSpent()+"</b> spent";
+}
+function traitSpent(){ if(!state.trait)return 0; const t=traitById[state.trait]; let s=0; for(let i=1;i<=(state.traitTier||0);i++){ s+=(t.tiers[i]?.cost||0);} return s; }
+lvlInput.addEventListener("change",()=>{let v=parseInt(lvlInput.value,10);if(isNaN(v)||v<1)v=1;if(v>100)v=100;state.level=v;talentTree.render();if(activeTab==="soul")renderSoul();saveState();});
+tpInput.addEventListener("change",()=>{let v=parseInt(tpInput.value,10);if(isNaN(v)||v<0)v=0;state.tp=v;refreshPts();saveState();});
+spInput.addEventListener("change",()=>{let v=parseInt(spInput.value,10);if(isNaN(v)||v<0)v=0;state.sp=v;if(activeTab==="soul")renderSoul();refreshPts();saveState();});
+trpInput.addEventListener("change",()=>{let v=parseInt(trpInput.value,10);if(isNaN(v)||v<0)v=0;state.trp=v;renderTrait();saveState();});
+
+/* wire refresh callbacks */
+talentTree.refresh=()=>{ talentTree.render(); refreshPts(); saveState(); };
+
+/* ---------- DM flags ---------- */
+const dmPanel=document.getElementById("dmPanel"), flagList=document.getElementById("flagList");
+function buildFlagPanel(){
+  if(!FLAGS.length){flagList.innerHTML=`<p class="note">No story flags defined.</p>`;return;}
+  flagList.innerHTML=FLAGS.map(f=>{const on=state.flags.has(f.id);return `<label class="flag ${on?'on':''}" data-fid="${f.id}"><input type="checkbox" ${on?'checked':''}/><span><span class="ft">${f.type||'flag'}</span><span class="fl">${f.label}</span>${f.hint?`<span class="fh">${f.hint}</span>`:''}</span></label>`;}).join("");
+  flagList.querySelectorAll(".flag").forEach(el=>{el.querySelector("input").onchange=e=>{const fid=el.dataset.fid;if(e.target.checked)state.flags.add(fid);else state.flags.delete(fid);buildFlagPanel();talentTree.render();if(activeTab==="soul")renderSoul();saveState();};});
+}
+document.getElementById("btnDM").onclick=()=>{buildFlagPanel();dmPanel.classList.add("open")};
+document.getElementById("dmClose").onclick=()=>dmPanel.classList.remove("open");
+
+/* ---------- pan & zoom (per stage) ---------- */
+function makePanZoom(stageEl,worldEl){
+  let scale=1,ox=40,oy=24,panning=false,sx=0,sy=0;
+  function apply(){worldEl.style.transform=`translate(${ox}px,${oy}px) scale(${scale})`}
+  apply();
+  stageEl.addEventListener("mousedown",e=>{if(e.target.closest(".node")||e.target.closest("#detail"))return;panning=true;stageEl.classList.add("drag");sx=e.clientX-ox;sy=e.clientY-oy;closeDetail()});
+  window.addEventListener("mousemove",e=>{if(!panning)return;ox=e.clientX-sx;oy=e.clientY-sy;apply()});
+  window.addEventListener("mouseup",()=>{panning=false;stageEl.classList.remove("drag")});
+  stageEl.addEventListener("wheel",e=>{e.preventDefault();const f=e.deltaY<0?1.1:.9;const rc=stageEl.getBoundingClientRect();const mx=e.clientX-rc.left,my=e.clientY-rc.top;const wx=(mx-ox)/scale,wy=(my-oy)/scale;scale=Math.min(2.2,Math.max(.35,scale*f));ox=mx-wx*scale;oy=my-wy*scale;apply()},{passive:false});
+  return { set(s,x,y){scale=s;ox=x;oy=y;apply()}, get(){return{scale,ox,oy}}, zoom(f){scale=Math.min(2.2,Math.max(.35,scale*f));apply();} };
+}
+const talentPZ=makePanZoom(stage,world);
+function fitTalent(){const r=talentTree.fitTo(stage);talentPZ.set(r.scale,40,24);}
+document.getElementById("zIn").onclick=()=>{if(activeTab==="talents")talentPZ.zoom(1.15);};
+document.getElementById("zOut").onclick=()=>{if(activeTab==="talents")talentPZ.zoom(.87);};
+document.getElementById("zFit").onclick=()=>{if(activeTab==="talents")fitTalent();};
+
+/* ---------- persistence ---------- */
+function saveState(){try{
+  localStorage.setItem("gto_feattree",JSON.stringify({
+    talentUnlocked:[...state.talentUnlocked], flags:[...state.flags],
+    level:state.level||1,
+    tp:state.tp, sp:state.sp, trp:state.trp, spSpent:state.spSpent||0,
+    soulName:state.soulName||"", soulSlots:state.soulSlots, soulLibFilter:state.soulLibFilter||{type:"",cat:"",theme:""},
+    synergyChoices:state.synergyChoices||{},
+    trait:state.trait, traitTier:state.traitTier,
+    filter:state.filter, tab:activeTab
+  }));
+}catch(e){}}
+function loadState(){
+  let o={};
+  try{const raw=localStorage.getItem("gto_feattree");if(raw)o=JSON.parse(raw);}catch(e){}
+  const slots=o.soulSlots||{passive:[],active:[],sign:[]};
+  // Legacy migration: old saves used 'aura' key; move to 'sign'
+  const signSlots=slots.sign||slots.aura||[];
+  return {
+    talentUnlocked:new Set(o.talentUnlocked||[]), flags:new Set(o.flags||[]),
+    level:o.level||1,
+    tp:o.tp??0, sp:o.sp??0, trp:o.trp??0, spSpent:o.spSpent||0,
+    soulName:o.soulName||"", soulSlots:{passive:slots.passive||[],active:slots.active||[],sign:signSlots},
+    soulLibFilter:o.soulLibFilter||{type:"",cat:"",theme:""},
+    synergyChoices:o.synergyChoices||{},
+    trait:o.trait||null, traitTier:o.traitTier||0,
+    filter:o.filter||"", tab:o.tab||"talents"
+  };
+}
+
+/* ---------- export / import / reset ---------- */
+const fileIn=document.getElementById("fileIn");
+document.getElementById("btnExport").onclick=()=>{
+  const data=JSON.stringify({
+    talentUnlocked:[...state.talentUnlocked], flags:[...state.flags],
+    level:state.level||1,
+    tp:state.tp, sp:state.sp, trp:state.trp, spSpent:state.spSpent||0,
+    soulName:state.soulName||"", soulSlots:state.soulSlots,
+    synergyChoices:state.synergyChoices||{},
+    trait:state.trait, traitTier:state.traitTier
+  },null,2);
+  const b=new Blob([data],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="gto-build.json";a.click();
+};
+document.getElementById("btnImport").onclick=()=>fileIn.click();
+fileIn.onchange=()=>{const f=fileIn.files[0];if(!f)return;const rd=new FileReader();rd.onload=()=>{try{
+  const o=JSON.parse(rd.result);
+  state.talentUnlocked=new Set(o.talentUnlocked||[]);
+  state.flags=new Set(o.flags||[]);
+  state.level=o.level||1;
+  state.tp=o.tp??state.tp; state.sp=o.sp??state.sp; state.trp=o.trp??state.trp; state.spSpent=o.spSpent||0;
+  state.soulName=o.soulName||"";
+  const s=o.soulSlots||{}; state.soulSlots={passive:s.passive||[],active:s.active||[],sign:s.sign||s.aura||[]};
+  state.synergyChoices=o.synergyChoices||{};
+  state.trait=o.trait||null; state.traitTier=o.traitTier||0;
+  buildSubbar(); talentTree.render(); renderSoul(); renderTrait(); refreshPts(); fitTalent();
+}catch(e){alert("That file couldn't be read as a build.")}};rd.readAsText(f);fileIn.value="";};
+document.getElementById("btnReset").onclick=()=>{if(confirm("Reset this build? Unlocked talents clear, your Soul is emptied, and the Trait resets to unchosen. Story flags are kept.")){
+  state.talentUnlocked=new Set(); state.soulSlots={passive:[],active:[],sign:[]}; state.soulName=""; state.spSpent=0; state.synergyChoices={}; state.trait=null; state.traitTier=0; state.level=1;
+  talentTree.render(); renderSoul(); renderTrait(); refreshPts(); saveState();
+}};
+
+/* ---------- global popover dismissal ---------- */
+document.addEventListener("click",e=>{if(!e.target.closest("#detail")&&!e.target.closest(".node"))closeDetail()});
+window.addEventListener("resize",()=>{if(detail.style.display==="block")closeDetail()});
+
+/* ---------- boot ---------- */
+buildSubbar();
+talentTree.render();
+renderSoul();
+renderTrait();
+refreshPts();
+setTab(state.tab||"talents");
+setTimeout(fitTalent,60);
+}
+</script>
+</body>
+</html>

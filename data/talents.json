@@ -1,0 +1,1459 @@
+[
+  {
+    "id": "tough_hide",
+    "name": "Tough Hide",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+2 maximum HP (one-time)."
+  },
+  {
+    "id": "strong_back",
+    "name": "Strong Back",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Your carrying capacity is doubled. You have advantage on Athletics checks to lift, drag, or push."
+  },
+  {
+    "id": "quick_reflexes",
+    "name": "Quick Reflexes",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to initiative rolls."
+  },
+  {
+    "id": "steady_hand",
+    "name": "Steady Hand",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to one weapon-attack roll of your choice per short rest."
+  },
+  {
+    "id": "weapon_grip",
+    "name": "Weapon Grip",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Gain proficiency with one martial weapon of your choice."
+  },
+  {
+    "id": "blade_study",
+    "name": "Blade Study",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "prereq": [
+      "weapon_grip"
+    ],
+    "desc": "You have studied edged weapons. +1 to attack rolls with slashing or piercing weapons made against a target you have hit already this combat."
+  },
+  {
+    "id": "blunt_study",
+    "name": "Blunt Study",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "prereq": [
+      "weapon_grip"
+    ],
+    "desc": "You have studied bludgeoning weapons and unarmed combat. When you hit a target with a bludgeoning weapon or unarmed strike, you may forgo damage to give the target disadvantage on its next attack roll before the end of its next turn. Once per short rest."
+  },
+  {
+    "id": "pole_study",
+    "name": "Reach Study",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "prereq": [
+      "weapon_grip"
+    ],
+    "desc": "You have studied polearms and spears. Reach weapons in your hands threaten 5 ft. farther for opportunity attacks."
+  },
+  {
+    "id": "armor_familiarity",
+    "name": "Armor Familiarity",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Gain proficiency with one armor category (light, medium, or heavy) or with shields."
+  },
+  {
+    "id": "iron_stance",
+    "name": "Iron Stance",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You have advantage on saves against being knocked prone or shoved."
+  },
+  {
+    "id": "careful_swing",
+    "name": "Careful Swing",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Once per short rest, when you would hit an ally with a melee attack (through friendly fire, sweeping attacks, etc.), you may choose to miss instead."
+  },
+  {
+    "id": "unarmored_defense",
+    "name": "Unarmored Defense",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "While wearing no armor and no shield, your AC equals 10 + DEX mod + CON mod."
+  },
+  {
+    "id": "second_wind_touched",
+    "name": "Second Wind Touched",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Once per long rest as a bonus action, regain HP equal to 1d6 + your character level (max 10 total)."
+  },
+  {
+    "id": "gritty_endurance",
+    "name": "Gritty Endurance",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "When you take a short rest, you may spend one hit die and regain HP equal to the roll + your CON mod, without using any of the short rest's normal hit dice."
+  },
+  {
+    "id": "athlete",
+    "name": "Athlete",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "strong_back"
+    ],
+    "desc": "5e feat: Athlete. +1 STR or DEX. Standing from prone costs only 5 ft. of movement, climbing does not halve your speed, and you can make running long/high jumps after only a 5 ft. run."
+  },
+  {
+    "id": "resilient",
+    "name": "Resilient",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "tough_hide"
+    ],
+    "desc": "5e feat: Resilient. Choose one ability score; increase it by 1 and gain proficiency in saving throws using that ability."
+  },
+  {
+    "id": "tavern_brawler",
+    "name": "Tavern Brawler",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "blunt_study"
+    ],
+    "desc": "5e feat: Tavern Brawler. +1 STR or CON. Proficient with improvised weapons. Unarmed strikes deal 1d4. When you hit with an unarmed or improvised strike, you may attempt to grapple as a bonus action."
+  },
+  {
+    "id": "charger",
+    "name": "Charger",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "quick_reflexes"
+    ],
+    "desc": "5e feat: Charger. When you Dash, use a bonus action to make a melee attack or shove. If you moved 10+ ft. straight before the attack, deal +5 damage or push the target 10 ft."
+  },
+  {
+    "id": "crusher",
+    "name": "Crusher",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "blunt_study"
+    ],
+    "desc": "5e feat: Crusher. +1 STR or CON. Once per turn, when you deal bludgeoning damage, push the target 5 ft. Crits with bludgeoning give allies advantage on attacks against the target until start of your next turn."
+  },
+  {
+    "id": "piercer",
+    "name": "Piercer",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "blade_study"
+    ],
+    "desc": "5e feat: Piercer. +1 STR or DEX. Once per turn when you deal piercing damage, reroll one damage die. Crits with piercing let you roll one additional damage die."
+  },
+  {
+    "id": "slasher",
+    "name": "Slasher",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "blade_study"
+    ],
+    "desc": "5e feat: Slasher. +1 STR or DEX. Once per turn when you deal slashing damage, reduce the target's speed by 10 ft. Crits with slashing impose disadvantage on the target's attacks until start of your next turn."
+  },
+  {
+    "id": "tough",
+    "name": "Tough",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "tough_hide",
+      "resilient"
+    ],
+    "desc": "5e feat: Tough. Your HP maximum increases by twice your character level, and by 2 whenever you gain a level thereafter."
+  },
+  {
+    "id": "mobile",
+    "name": "Mobile",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "quick_reflexes",
+      "charger"
+    ],
+    "desc": "5e feat: Mobile. +10 ft. speed. When you Dash, difficult terrain doesn't cost extra movement. When you make a melee attack against a creature, you don't provoke opportunity attacks from that creature for the rest of the turn."
+  },
+  {
+    "id": "sentinel",
+    "name": "Sentinel",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "resilient"
+    ],
+    "desc": "5e feat: Sentinel. Creatures provoking an opportunity attack from you have their speed reduced to 0 for that turn. You can attack creatures using Disengage. When a creature within 5 ft. attacks a target other than you, you may use your reaction to make a melee attack against that creature."
+  },
+  {
+    "id": "great_weapon_master",
+    "name": "Great Weapon Master",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "tavern_brawler"
+    ],
+    "desc": "5e feat: Great Weapon Master. On a crit or when you drop a creature to 0 HP with a melee weapon, make one melee attack as a bonus action. Before making a melee attack with a heavy weapon you are proficient with, you may take -5 to hit for +10 damage."
+  },
+  {
+    "id": "polearm_master",
+    "name": "Polearm Master",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "pole_study"
+    ],
+    "desc": "5e feat: Polearm Master. When wielding a glaive, halberd, quarterstaff, spear, or pike, you can make a bonus-action attack with the opposite end (1d4 bludgeoning, same modifiers). Creatures entering your reach provoke opportunity attacks."
+  },
+  {
+    "id": "shield_master",
+    "name": "Shield Master",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "armor_familiarity"
+    ],
+    "desc": "5e feat: Shield Master. If you take the Attack action, use a bonus action to shove a creature within 5 ft. with your shield. +2 to DEX saves against effects you can see; if the save halves damage, take no damage on success."
+  },
+  {
+    "id": "dual_wielder",
+    "name": "Dual Wielder",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "blade_study"
+    ],
+    "desc": "5e feat: Dual Wielder. +1 AC while wielding two melee weapons. You can two-weapon fight with non-light melee weapons. You can draw or stow two weapons in the time you'd normally draw one."
+  },
+  {
+    "id": "heavy_armor_master",
+    "name": "Heavy Armor Master",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "armor_familiarity"
+    ],
+    "desc": "5e feat: Heavy Armor Master. +1 STR. While wearing heavy armor, bludgeoning, piercing, and slashing damage from nonmagical sources is reduced by 3."
+  },
+  {
+    "id": "undying",
+    "name": "Undying",
+    "branch": "Physical",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "tough"
+    ],
+    "levelReq": 50,
+    "reqText": "GTO level 50+",
+    "desc": "When you would be reduced to 0 HP, you instead drop to 1 HP. Recharges on a long rest."
+  },
+  {
+    "id": "warden_bane",
+    "name": "Warden's Bane",
+    "branch": "Physical",
+    "rarity": "mythical",
+    "cost": 65,
+    "prereq": [
+      "undying"
+    ],
+    "flags": [
+      "slain_ashen_warden"
+    ],
+    "secret": true,
+    "hideStyle": "blank",
+    "desc": "Once per long rest, declare a single attack a Warden's Bane: it automatically critically hits and deals an extra 6d12 force damage."
+  },
+  {
+    "id": "sharp_mind",
+    "name": "Sharp Mind",
+    "branch": "Mental",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to one Intelligence check per short rest."
+  },
+  {
+    "id": "strong_will",
+    "name": "Strong Will",
+    "branch": "Mental",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to one Wisdom saving throw per short rest."
+  },
+  {
+    "id": "perfect_recall",
+    "name": "Perfect Recall",
+    "branch": "Mental",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You can perfectly recall anything you have seen or heard within the last hour."
+  },
+  {
+    "id": "quick_learner",
+    "name": "Quick Learner",
+    "branch": "Mental",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Learning a new tool proficiency takes half the normal downtime."
+  },
+  {
+    "id": "keen_senses",
+    "name": "Keen Senses",
+    "branch": "Mental",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to Perception checks that use sight or hearing."
+  },
+  {
+    "id": "keen_mind",
+    "name": "Keen Mind",
+    "branch": "Mental",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "perfect_recall"
+    ],
+    "desc": "5e feat: Keen Mind. +1 INT. You always know which way is north, the number of hours until sunrise/sunset, and can perfectly recall anything you've seen or heard within the past month."
+  },
+  {
+    "id": "skilled",
+    "name": "Skilled",
+    "branch": "Mental",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "sharp_mind"
+    ],
+    "desc": "5e feat: Skilled. Gain proficiency in any combination of three skills or tools."
+  },
+  {
+    "id": "prodigy",
+    "name": "Prodigy",
+    "branch": "Mental",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "quick_learner"
+    ],
+    "desc": "5e feat: Prodigy. Gain one skill proficiency, one tool proficiency, and fluency in one language. Choose one skill you are proficient in and gain expertise in it."
+  },
+  {
+    "id": "observant",
+    "name": "Observant",
+    "branch": "Mental",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "keen_senses"
+    ],
+    "desc": "5e feat: Observant. +1 INT or WIS. Reading lips of a language you know. +5 to passive Perception and passive Investigation."
+  },
+  {
+    "id": "skill_expert",
+    "name": "Skill Expert",
+    "branch": "Mental",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "skilled"
+    ],
+    "desc": "5e feat: Skill Expert. +1 to an ability score of choice. Proficiency in one skill. Choose a skill you are proficient in and gain expertise in it."
+  },
+  {
+    "id": "honeyed_words",
+    "name": "Honeyed Words",
+    "branch": "Social",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to one Persuasion check per short rest."
+  },
+  {
+    "id": "read_the_room",
+    "name": "Read the Room",
+    "branch": "Social",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to one Insight check per short rest."
+  },
+  {
+    "id": "traveler_tongue",
+    "name": "Traveler's Tongue",
+    "branch": "Social",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You learn one additional language of your choice."
+  },
+  {
+    "id": "good_first_impression",
+    "name": "Good First Impression",
+    "branch": "Social",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "When first meeting a creature, you may reroll a failed Charisma check made in the first minute of the interaction. Once per creature."
+  },
+  {
+    "id": "performer",
+    "name": "Performer",
+    "branch": "Social",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Gain proficiency in Performance, and with one musical instrument or gaming set."
+  },
+  {
+    "id": "linguist",
+    "name": "Linguist",
+    "branch": "Social",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "traveler_tongue"
+    ],
+    "desc": "5e feat: Linguist. +1 INT. Learn three additional languages. You can create written ciphers that others cannot decode without your key or a DC 20 INT check."
+  },
+  {
+    "id": "actor",
+    "name": "Actor",
+    "branch": "Social",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "performer"
+    ],
+    "desc": "5e feat: Actor. +1 CHA. Advantage on Deception and Performance checks when trying to pass as someone else. You can mimic voices and sounds you've heard well enough to fool casual listeners (WIS Insight vs. your CHA Deception to see through)."
+  },
+  {
+    "id": "inspiring_leader",
+    "name": "Inspiring Leader",
+    "branch": "Social",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "honeyed_words"
+    ],
+    "desc": "5e feat: Inspiring Leader. Spend 10 minutes speaking to up to six creatures (including you) who can see, hear, and understand you. Each gains temp HP equal to your level + your CHA modifier. A creature can't gain temp HP from this feat again until it finishes a short or long rest."
+  },
+  {
+    "id": "nimble_step",
+    "name": "Nimble Step",
+    "branch": "Survival",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+5 ft. speed when moving through difficult terrain (once per turn)."
+  },
+  {
+    "id": "forager",
+    "name": "Forager",
+    "branch": "Survival",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "When traveling in wilderness, you find enough food and water for yourself each day without a check."
+  },
+  {
+    "id": "light_sleeper",
+    "name": "Light Sleeper",
+    "branch": "Survival",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You are not surprised while conscious, even if asleep. You gain the benefits of a long rest after 6 hours instead of 8."
+  },
+  {
+    "id": "weather_hardened",
+    "name": "Weather-Hardened",
+    "branch": "Survival",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You suffer no ill effects from non-extreme hot or cold weather."
+  },
+  {
+    "id": "trapfinder",
+    "name": "Trapfinder",
+    "branch": "Survival",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to Perception and Investigation checks to find traps."
+  },
+  {
+    "id": "alert",
+    "name": "Alert",
+    "branch": "Survival",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "light_sleeper"
+    ],
+    "desc": "5e feat: Alert. +5 to initiative. You can't be surprised while conscious. Other creatures don't gain advantage on attack rolls against you from being unseen by you."
+  },
+  {
+    "id": "dungeon_delver",
+    "name": "Dungeon Delver",
+    "branch": "Survival",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "trapfinder"
+    ],
+    "desc": "5e feat: Dungeon Delver. Advantage on Perception and Investigation checks to detect hidden doors and traps. Resistance to trap damage. You can search for traps at normal travel pace."
+  },
+  {
+    "id": "lucky",
+    "name": "Lucky",
+    "branch": "Survival",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "nimble_step"
+    ],
+    "desc": "5e feat: Lucky. You have 3 luck points. When you make an attack roll, ability check, or saving throw, you may spend one luck point to roll an additional d20 and choose which to use. You may also spend a luck point when a creature attacks you to have them roll an extra d20 (you choose which they use). Regain all on a long rest."
+  },
+  {
+    "id": "durable",
+    "name": "Durable",
+    "branch": "Survival",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "weather_hardened"
+    ],
+    "desc": "5e feat: Durable. +1 CON. When you roll a hit die to regain HP, treat any roll below your CON modifier as equal to your CON modifier (minimum 1)."
+  },
+  {
+    "id": "drop_of_mana",
+    "name": "Drop of Mana",
+    "branch": "Arcane",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+3 maximum MP (one-time). If you had no MP pool, you gain one."
+  },
+  {
+    "id": "cantrip_touched",
+    "name": "Cantrip-Touched",
+    "branch": "Arcane",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You learn one cantrip from any class list. Your casting stat for it is your highest mental ability score."
+  },
+  {
+    "id": "minor_arcanist",
+    "name": "Minor Arcanist",
+    "branch": "Arcane",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You have advantage on Arcana checks made to identify a spell being cast or a common magical effect."
+  },
+  {
+    "id": "element_dabbler",
+    "name": "Element Dabbler",
+    "branch": "Arcane",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You gain Novice proficiency in one element of your choice."
+  },
+  {
+    "id": "arcane_focus",
+    "name": "Arcane Focus",
+    "branch": "Arcane",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You may use any weapon or unarmed strike as a spellcasting focus."
+  },
+  {
+    "id": "magic_initiate",
+    "name": "Magic Initiate",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "cantrip_touched"
+    ],
+    "desc": "5e feat: Magic Initiate. Choose a class (bard, cleric, druid, sorcerer, warlock, or wizard). Learn 2 cantrips and one 1st-level spell from that class. You can cast the 1st-level spell once per long rest without spending resources."
+  },
+  {
+    "id": "metamagic_adept",
+    "name": "Metamagic Adept",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "drop_of_mana"
+    ],
+    "desc": "5e feat: Metamagic Adept. Learn 2 Metamagic options from the Sorcerer's list. Gain 2 sorcery points to use them, regaining all on a long rest."
+  },
+  {
+    "id": "eldritch_adept",
+    "name": "Eldritch Adept",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "cantrip_touched"
+    ],
+    "desc": "5e feat: Eldritch Adept. Learn one Eldritch Invocation. If it has a prerequisite, you must meet it."
+  },
+  {
+    "id": "telepathic",
+    "name": "Telepathic",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "minor_arcanist"
+    ],
+    "desc": "5e feat: Telepathic. +1 to an INT/WIS/CHA. Speak telepathically to a creature within 60 ft. that shares a language with you. You can cast Detect Thoughts once per long rest without a slot."
+  },
+  {
+    "id": "telekinetic",
+    "name": "Telekinetic",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "minor_arcanist"
+    ],
+    "desc": "5e feat: Telekinetic. +1 to INT/WIS/CHA. Learn Mage Hand as a cantrip; the hand is invisible. As a bonus action, telekinetically shove a creature or object within 30 ft. (target STR save vs. your spell save DC or moves 5 ft.)."
+  },
+  {
+    "id": "fey_touched",
+    "name": "Fey Touched",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "minor_arcanist"
+    ],
+    "desc": "5e feat: Fey Touched. +1 to INT/WIS/CHA. Learn Misty Step and one 1st-level divination or enchantment spell of your choice. Cast each once per long rest without a slot; you may otherwise cast them by spending slots normally."
+  },
+  {
+    "id": "shadow_touched",
+    "name": "Shadow Touched",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "minor_arcanist"
+    ],
+    "desc": "5e feat: Shadow Touched. +1 to INT/WIS/CHA. Learn Invisibility and one 1st-level illusion or necromancy spell of your choice. Cast each once per long rest without a slot; you may otherwise cast them by spending slots normally."
+  },
+  {
+    "id": "efficient_caster",
+    "name": "Efficient Caster",
+    "branch": "Arcane",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "drop_of_mana"
+    ],
+    "desc": "Once per short rest, cast a spell of 3rd level or lower for 2 less MP (minimum 1)."
+  },
+  {
+    "id": "war_caster",
+    "name": "War Caster",
+    "branch": "Arcane",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "arcane_focus"
+    ],
+    "desc": "5e feat: War Caster. Advantage on CON saves to maintain concentration. You can perform somatic components with weapons/shields in your hands. When a hostile creature provokes an opportunity attack, you may cast a cantrip at them (1 action cast time, targets only that creature) instead."
+  },
+  {
+    "id": "spell_sniper",
+    "name": "Spell Sniper",
+    "branch": "Arcane",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "cantrip_touched"
+    ],
+    "desc": "5e feat: Spell Sniper. Attack-roll spells you cast double their range. Ignore half and three-quarters cover with attack-roll spells. Learn one attack cantrip from a spell list of your choice."
+  },
+  {
+    "id": "ritual_caster",
+    "name": "Ritual Caster",
+    "branch": "Arcane",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "magic_initiate"
+    ],
+    "desc": "5e feat: Ritual Caster. Choose a class (bard/cleric/druid/sorcerer/warlock/wizard). Acquire a ritual book with two 1st-level ritual spells from that class. You may cast any ritual spell in your book as a ritual."
+  },
+  {
+    "id": "element_focus",
+    "name": "Elemental Focus",
+    "branch": "Arcane",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "element_dabbler",
+      "efficient_caster"
+    ],
+    "reqText": "Novice in the chosen element",
+    "desc": "Advance one element proficiency by one step (to a maximum of Master through this node)."
+  },
+  {
+    "id": "elemental_adept",
+    "name": "Elemental Adept",
+    "branch": "Arcane",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "element_dabbler"
+    ],
+    "desc": "5e feat: Elemental Adept. Choose one damage type: acid, cold, fire, lightning, or thunder. Your spells with that damage type ignore resistance to it. Treat 1s on damage dice of that type as 2s. Repeatable — different damage type each time."
+  },
+  {
+    "id": "oracle_sight",
+    "name": "Oracle's Sight",
+    "branch": "Arcane",
+    "rarity": "legendary",
+    "cost": 45,
+    "prereq": [
+      "element_focus"
+    ],
+    "flags": [
+      "oracle_blessing"
+    ],
+    "secret": true,
+    "hideStyle": "blank",
+    "hint": "The blind woman on the mountain trades sight for sight.",
+    "desc": "You can cast Divination once per long rest without expending MP, and you always know the general nature of a creature's next action."
+  },
+  {
+    "id": "jack_of_trades",
+    "name": "Jack of Trades",
+    "branch": "General",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Gain proficiency in one skill of your choice."
+  },
+  {
+    "id": "tool_dabbler",
+    "name": "Tool Dabbler",
+    "branch": "General",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Gain proficiency with one artisan's tool, gaming set, or musical instrument."
+  },
+  {
+    "id": "lucky_penny",
+    "name": "Lucky Penny",
+    "branch": "General",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Once per long rest, reroll a d20 and take the new result. Must decide before the outcome is revealed."
+  },
+  {
+    "id": "well_traveled",
+    "name": "Well-Traveled",
+    "branch": "General",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You automatically know general facts about any settlement of 500+ people you have visited or heard extensively about."
+  },
+  {
+    "id": "kitchen_hand",
+    "name": "Kitchen-Hand",
+    "branch": "General",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Gain proficiency with cook's utensils. Meals you prepare take normal time but heal an extra 1 HP per hit die spent during a short rest by those who ate."
+  },
+  {
+    "id": "chef",
+    "name": "Chef",
+    "branch": "General",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "kitchen_hand"
+    ],
+    "desc": "5e feat: Chef. +1 CON or WIS. Cook's utensils proficiency. During a short rest, prepare enough food for up to CON mod + 4 creatures; each restores an extra 1d8 HP when they spend hit dice. During a long rest, bake special treats equal to your prof bonus; a creature that eats one gains temp HP equal to your prof bonus."
+  },
+  {
+    "id": "crafter",
+    "name": "Crafter",
+    "branch": "General",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "tool_dabbler"
+    ],
+    "desc": "5e feat: Crafter. Proficiency with three artisan's tools of your choice. Reduce the crafting time and cost of nonmagical items by 20%."
+  },
+  {
+    "id": "musician",
+    "name": "Musician",
+    "branch": "General",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "tool_dabbler"
+    ],
+    "desc": "5e feat: Musician. Proficiency with three musical instruments of your choice. Perform for up to prof bonus creatures during a short/long rest to grant each Inspiration (once per long rest per creature)."
+  },
+  {
+    "id": "tp_saver",
+    "name": "Frugal Learner",
+    "branch": "Meta",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "The first Common talent you buy after taking this one costs 0 Talent Points. Can only be taken once."
+  },
+  {
+    "id": "observant_note",
+    "name": "Observant Note",
+    "branch": "Meta",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Once per long rest, ask the DM one yes/no question about the immediate scene or a creature in it. The DM answers truthfully or says the answer is unknowable."
+  },
+  {
+    "id": "soul_kindler",
+    "name": "Soul-Kindler",
+    "branch": "Meta",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You gain access to one additional Common Soul Effect of your choice from the base library."
+  },
+  {
+    "id": "quick_draw",
+    "name": "Quick Draw",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You can draw or stow one weapon during your turn as part of your movement, not requiring an object interaction."
+  },
+  {
+    "id": "marksman_eye",
+    "name": "Marksman's Eye",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to attack rolls with ranged weapons against targets within 30 ft."
+  },
+  {
+    "id": "defensive_duelist",
+    "name": "Defensive Duelist",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "quick_reflexes"
+    ],
+    "desc": "5e feat: Defensive Duelist. When wielding a finesse weapon you are proficient with and hit by a melee attack, use your reaction to add your prof bonus to your AC against that attack."
+  },
+  {
+    "id": "crossbow_expert",
+    "name": "Crossbow Expert",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "marksman_eye"
+    ],
+    "desc": "5e feat: Crossbow Expert. Ignore the loading property of crossbows you are proficient with. Being within 5 ft. of a hostile creature doesn't impose disadvantage on your ranged attacks. When you attack with a one-handed weapon, you can attack with a hand crossbow you're holding as a bonus action."
+  },
+  {
+    "id": "gunner",
+    "name": "Gunner",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "marksman_eye"
+    ],
+    "desc": "5e feat: Gunner. +1 DEX. Firearm proficiency. Ignore firearm loading property. Being within 5 ft. of a hostile creature doesn't impose disadvantage on your ranged attacks."
+  },
+  {
+    "id": "fighting_initiate",
+    "name": "Fighting Initiate",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "weapon_grip"
+    ],
+    "desc": "5e feat: Fighting Initiate. Learn one Fighting Style from the Fighter's list. Can be taken multiple times, learning a different style each time."
+  },
+  {
+    "id": "grappler_feat",
+    "name": "Grappler",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "strong_back"
+    ],
+    "desc": "5e feat: Grappler. +1 STR. Advantage on attacks against creatures you are grappling. Grappling a creature lets you use an action on your subsequent turn to also make it restrained."
+  },
+  {
+    "id": "mounted_combatant",
+    "name": "Mounted Combatant",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "quick_reflexes"
+    ],
+    "desc": "5e feat: Mounted Combatant. While mounted: advantage on attacks against unmounted foes smaller than your mount, redirect attacks aimed at your mount to yourself, and if your mount is subject to a DEX save, it takes no damage on a success and half on a fail."
+  },
+  {
+    "id": "martial_adept",
+    "name": "Martial Adept",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "weapon_grip"
+    ],
+    "desc": "5e feat: Martial Adept. Learn 2 maneuvers from the Battle Master list. Gain 1 superiority die (d6) to fuel them; regain on a short rest."
+  },
+  {
+    "id": "sharpshooter",
+    "name": "Sharpshooter",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "crossbow_expert"
+    ],
+    "desc": "5e feat: Sharpshooter. Attacking at long range doesn't impose disadvantage. Your ranged attacks ignore half and three-quarters cover. Before making a ranged attack with a weapon you're proficient with, you may take -5 to hit for +10 damage."
+  },
+  {
+    "id": "mage_slayer",
+    "name": "Mage Slayer",
+    "branch": "Physical",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "sentinel"
+    ],
+    "desc": "5e feat: Mage Slayer. When a creature within 5 ft. of you casts a spell, use your reaction to make a melee attack against it. Advantage on saves against spells cast by creatures within 5 ft. of you. When you damage a concentrating creature, it has disadvantage on the concentration save."
+  },
+  {
+    "id": "savage_attacker",
+    "name": "Savage Attacker",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "steady_hand"
+    ],
+    "desc": "5e feat: Savage Attacker. Once per turn when you roll damage for a melee weapon attack, you can reroll the weapon's damage dice and use either total."
+  },
+  {
+    "id": "medium_armor_master",
+    "name": "Medium Armor Master",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "armor_familiarity"
+    ],
+    "desc": "5e feat: Medium Armor Master. Wearing medium armor doesn't impose disadvantage on Stealth. Medium armor lets you add up to +3 (not +2) of your DEX bonus to AC."
+  },
+  {
+    "id": "lightly_armored",
+    "name": "Lightly Armored",
+    "branch": "Physical",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "5e feat: Lightly Armored. +1 STR or DEX. Gain proficiency with light armor."
+  },
+  {
+    "id": "moderately_armored",
+    "name": "Moderately Armored",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "lightly_armored"
+    ],
+    "desc": "5e feat: Moderately Armored. +1 STR or DEX. Gain proficiency with medium armor and shields."
+  },
+  {
+    "id": "heavily_armored",
+    "name": "Heavily Armored",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "moderately_armored"
+    ],
+    "desc": "5e feat: Heavily Armored. +1 STR. Gain proficiency with heavy armor."
+  },
+  {
+    "id": "weapon_master_feat",
+    "name": "Weapon Master",
+    "branch": "Physical",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "weapon_grip"
+    ],
+    "desc": "5e feat: Weapon Master. +1 STR or DEX. Gain proficiency with four weapons of your choice."
+  },
+  {
+    "id": "peerless_athlete",
+    "name": "Peerless Athlete",
+    "branch": "Physical",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "athlete",
+      "mobile"
+    ],
+    "desc": "Your speed increases by 10 ft. You have advantage on all Strength and Dexterity checks made outside of combat. You may swap position with a willing ally within 5 ft. as part of your movement, once per turn."
+  },
+  {
+    "id": "weaponmaster_ascendant",
+    "name": "Weaponmaster Ascendant",
+    "branch": "Physical",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "great_weapon_master",
+      "sharpshooter"
+    ],
+    "levelReq": 40,
+    "reqText": "GTO level 40+",
+    "desc": "Once per turn when you hit with a weapon attack, you may add half your character level (rounded down) to the damage roll."
+  },
+  {
+    "id": "scholar",
+    "name": "Scholar",
+    "branch": "Mental",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Gain proficiency in Arcana, History, Nature, or Religion (choose one)."
+  },
+  {
+    "id": "focused_learner",
+    "name": "Focused Learner",
+    "branch": "Mental",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You need only half the normal downtime to learn a new language or gain a new tool proficiency."
+  },
+  {
+    "id": "sage_advice",
+    "name": "Sage's Advice",
+    "branch": "Mental",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "observant",
+      "scholar"
+    ],
+    "desc": "When you make an INT check to recall lore, you can choose to succeed if your total roll would be 10 or higher. When you fail such a check, the DM tells you one true related fact you didn't ask for."
+  },
+  {
+    "id": "iron_mind",
+    "name": "Iron Mind",
+    "branch": "Mental",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "strong_will"
+    ],
+    "desc": "You are immune to being charmed by creatures of CR equal to your prof bonus or lower. Advantage on saves against being charmed, frightened, or possessed by higher-CR creatures."
+  },
+  {
+    "id": "peerless_intellect",
+    "name": "Peerless Intellect",
+    "branch": "Mental",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "sage_advice",
+      "keen_mind"
+    ],
+    "levelReq": 40,
+    "reqText": "GTO level 40+",
+    "desc": "You can attempt any INT check untrained without disadvantage. Once per long rest, take 20 on an INT check made outside of combat, treating it as though you rolled a natural 20 for skill purposes."
+  },
+  {
+    "id": "silver_tongue",
+    "name": "Silver Tongue",
+    "branch": "Social",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "When you speak a lie in a language another creature understands, you may substitute your Deception result for its passive Insight to determine if the lie is caught."
+  },
+  {
+    "id": "disarming_smile",
+    "name": "Disarming Smile",
+    "branch": "Social",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "Once per short rest, you may attempt to calm a hostile creature that can see and understand you. It makes a WIS save (DC 8 + prof + CHA); on fail, it will not initiate hostility against you for 1 minute unless attacked."
+  },
+  {
+    "id": "master_negotiator",
+    "name": "Master Negotiator",
+    "branch": "Social",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "inspiring_leader",
+      "silver_tongue"
+    ],
+    "desc": "You have advantage on Persuasion and Deception checks when the stakes are non-violent (bartering, diplomacy, favors). Prices for goods and services you negotiate are reduced by 10-25% at the DM's discretion."
+  },
+  {
+    "id": "masked_identity",
+    "name": "Masked Identity",
+    "branch": "Social",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "actor"
+    ],
+    "desc": "You can maintain up to three distinct personas (name, mannerism, voice). Detecting a lie through Insight when you are in a persona is at disadvantage, and creatures who know one persona do not automatically recognize you as another."
+  },
+  {
+    "id": "voice_of_command",
+    "name": "Voice of Command",
+    "branch": "Social",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "inspiring_leader",
+      "master_negotiator"
+    ],
+    "levelReq": 40,
+    "reqText": "GTO level 40+",
+    "desc": "Once per long rest, issue a one-word command to a creature within 60 ft. that can hear and understand you. It makes a WIS save (DC 8 + prof + CHA) or obeys the command literally, as the Command spell, for 1 round."
+  },
+  {
+    "id": "tracker_eye",
+    "name": "Tracker's Eye",
+    "branch": "Survival",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to Survival checks to track, and to Perception checks to spot ambushes in wilderness terrain."
+  },
+  {
+    "id": "pack_mule",
+    "name": "Pack Mule",
+    "branch": "Survival",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You can carry rations, water, and light gear for two extra people without impacting your carrying capacity for other purposes."
+  },
+  {
+    "id": "skulker",
+    "name": "Skulker",
+    "branch": "Survival",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "trapfinder"
+    ],
+    "desc": "5e feat: Skulker. You can hide when only lightly obscured. Missing a ranged attack while hidden doesn't reveal your position. Dim light doesn't impose disadvantage on your WIS (Perception) checks relying on sight."
+  },
+  {
+    "id": "poisoner",
+    "name": "Poisoner",
+    "branch": "Survival",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "forager"
+    ],
+    "desc": "5e feat: Poisoner. Poisons you apply ignore poison resistance. Apply poison as a bonus action instead of an action. Craft potent poisons using downtime and 50 gp of materials per dose (DC 15 CON save vs. 2d8 poison + poisoned condition for 1 min)."
+  },
+  {
+    "id": "beast_friend",
+    "name": "Beast Friend",
+    "branch": "Survival",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "tracker_eye"
+    ],
+    "desc": "Beasts of CR 1/4 or lower will not initiate hostility toward you without provocation. You may use an action to attempt to calm a beast within 30 ft. (WIS check vs. its CR × 5)."
+  },
+  {
+    "id": "vagabond",
+    "name": "Vagabond",
+    "branch": "Survival",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "dungeon_delver",
+      "light_sleeper"
+    ],
+    "desc": "You need only 4 hours of sleep to benefit from a long rest. Once per long rest, take a full short rest in 15 minutes instead of the usual hour."
+  },
+  {
+    "id": "peerless_survivor",
+    "name": "Peerless Survivor",
+    "branch": "Survival",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "lucky",
+      "durable"
+    ],
+    "levelReq": 40,
+    "reqText": "GTO level 40+",
+    "desc": "You have resistance to environmental damage (falling, extreme temperatures, drowning, starvation). Once per long rest, when you fail a saving throw, you may reroll it with advantage."
+  },
+  {
+    "id": "artificer_initiate",
+    "name": "Artificer Initiate",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "minor_arcanist"
+    ],
+    "desc": "5e feat: Artificer Initiate. Learn one artificer cantrip. Learn one 1st-level artificer spell, castable once per long rest without a slot (INT as spellcasting mod). Gain proficiency with one tool of your choice, which counts as a spellcasting focus for you."
+  },
+  {
+    "id": "mp_conduit",
+    "name": "MP Conduit",
+    "branch": "Arcane",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "drop_of_mana"
+    ],
+    "desc": "+8 max MP (one-time). Once per long rest as an action, transfer up to 10 MP to a willing creature within 5 ft., or receive that much from them."
+  },
+  {
+    "id": "spellshaper",
+    "name": "Spellshaper",
+    "branch": "Arcane",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "metamagic_adept"
+    ],
+    "desc": "You gain 2 additional sorcery points and one additional Metamagic option of your choice. You may spend sorcery points to convert MP at a 1-for-2 rate as a bonus action, once per short rest."
+  },
+  {
+    "id": "arcane_savant",
+    "name": "Arcane Savant",
+    "branch": "Arcane",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "war_caster",
+      "efficient_caster"
+    ],
+    "levelReq": 40,
+    "reqText": "GTO level 40+",
+    "desc": "Your maximum MP increases by 20. Spells of 4th level or lower cost 1 less MP (min 1). You may cast one prepared spell of 3rd level or lower per long rest without expending MP."
+  },
+  {
+    "id": "arch_element",
+    "name": "Arch-Element",
+    "branch": "Arcane",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "elemental_adept",
+      "element_focus"
+    ],
+    "levelReq": 50,
+    "reqText": "GTO level 50+",
+    "desc": "Choose one element you have Elemental Focus in. Your spells and effects of that element deal +1d6 damage of that type, and you may treat a natural 1 on any damage die of that type as a natural 6 instead. Repeatable, but only one element per taking."
+  },
+  {
+    "id": "quartermaster",
+    "name": "Quartermaster",
+    "branch": "General",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "You can identify the market value of common trade goods and mundane items on sight, within 20% accuracy."
+  },
+  {
+    "id": "deft_hands",
+    "name": "Deft Hands",
+    "branch": "General",
+    "rarity": "common",
+    "cost": 1,
+    "desc": "+1 to Sleight of Hand checks. You can palm or pocket a small item as part of another action."
+  },
+  {
+    "id": "healer",
+    "name": "Healer",
+    "branch": "General",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "kitchen_hand"
+    ],
+    "desc": "5e feat: Healer. When you use a healer's kit to stabilize a creature, it also regains 1 HP. As an action, expend a use of a healer's kit to restore 1d6 + 4 + creature's hit dice HP to a creature; once per short rest per target."
+  },
+  {
+    "id": "merchant",
+    "name": "Merchant",
+    "branch": "General",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "quartermaster"
+    ],
+    "desc": "You have advantage on Persuasion checks made to haggle. You can appraise magical goods (rarity, general function) with a 10-minute inspection."
+  },
+  {
+    "id": "master_crafter",
+    "name": "Master Crafter",
+    "branch": "General",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "crafter"
+    ],
+    "desc": "You may craft magic items of Uncommon rarity given appropriate materials (DM discretion). Reduce time and cost for all crafting by an additional 20% (stacks with Crafter for 40% total)."
+  },
+  {
+    "id": "jack_master",
+    "name": "Jack of All Master",
+    "branch": "General",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "jack_of_trades"
+    ],
+    "desc": "You may add half your proficiency bonus (rounded down) to any ability check that doesn't already include your proficiency bonus."
+  },
+  {
+    "id": "peerless_polymath",
+    "name": "Peerless Polymath",
+    "branch": "General",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "jack_master",
+      "master_crafter"
+    ],
+    "levelReq": 40,
+    "reqText": "GTO level 40+",
+    "desc": "You have proficiency in every skill and tool. Once per long rest, treat a failed ability check as a success (declared before rolling)."
+  },
+  {
+    "id": "branch_mastery",
+    "name": "Branch Mastery",
+    "branch": "Meta",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "tp_saver"
+    ],
+    "desc": "Choose a Talent branch. All Common and Uncommon talents in that branch cost 1 less Talent Point (minimum 0)."
+  },
+  {
+    "id": "soul_deepener",
+    "name": "Soul-Deepener",
+    "branch": "Meta",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "soul_kindler"
+    ],
+    "desc": "You gain access to two additional Common Soul Effects of your choice from the base library, plus one Uncommon effect."
+  },
+  {
+    "id": "insight_of_the_system",
+    "name": "Insight of the System",
+    "branch": "Meta",
+    "rarity": "uncommon",
+    "cost": 3,
+    "prereq": [
+      "observant_note"
+    ],
+    "desc": "Your Observant Note talent recharges on a short rest instead of a long rest, and you may ask a two-part yes/no question with a single use."
+  },
+  {
+    "id": "talent_prodigy",
+    "name": "Talent Prodigy",
+    "branch": "Meta",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "branch_mastery"
+    ],
+    "desc": "When you gain Talent Points from a minor level, gain 1 additional Talent Point that must be spent within 24 hours of the level-up (RP time or real time, DM's call) or is lost."
+  },
+  {
+    "id": "soul_savant",
+    "name": "Soul Savant",
+    "branch": "Meta",
+    "rarity": "rare",
+    "cost": 6,
+    "prereq": [
+      "soul_deepener"
+    ],
+    "desc": "Reslotting Soul effects costs half the normal SP (rounded up, minimum 1). You may swap one slotted effect during a short rest for free, once per long rest."
+  },
+  {
+    "id": "meta_awakened",
+    "name": "Meta-Awakened",
+    "branch": "Meta",
+    "rarity": "epic",
+    "cost": 12,
+    "prereq": [
+      "talent_prodigy",
+      "soul_savant"
+    ],
+    "levelReq": 50,
+    "reqText": "GTO level 50+",
+    "desc": "Once per long rest, gain 3 temporary Talent Points that must be spent within 1 hour. Any commitment they buy is permanent."
+  }
+]

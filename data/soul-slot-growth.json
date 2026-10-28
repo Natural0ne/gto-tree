@@ -1,0 +1,26 @@
+{
+  "auto": [
+    {
+      "level": 5,
+      "passive": 1,
+      "active": 1,
+      "sign": 1,
+      "note": "Soul awakens"
+    },
+    {
+      "level": 25,
+      "passive": 1,
+      "active": 0,
+      "sign": 0,
+      "note": "The Soul deepens"
+    },
+    {
+      "level": 50,
+      "passive": 0,
+      "active": 1,
+      "sign": 0,
+      "note": "The Soul broadens"
+    }
+  ],
+  "flags": []
+}
